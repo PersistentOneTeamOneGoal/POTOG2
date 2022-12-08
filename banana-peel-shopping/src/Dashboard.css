@@ -1,15 +1,4 @@
-/* .nav-bar{
-  display: flex;
-  align-items: flex-start;
-}
-.nav-container{
-  display: flex;
-  flex: row;
-} */
-/* .product-item:hover {
-  outline: brown solid 3px;
-  height: 300px;
-} */
+
 :root {
 	--radius: 10px;
 

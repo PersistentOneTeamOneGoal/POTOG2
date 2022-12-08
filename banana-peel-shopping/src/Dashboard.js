@@ -62,7 +62,17 @@ const Dashboard = () => {
         </div>
       </section>
 
-      <section className="banner-container"><img className="banner" src={banner} alt="banner"></img></section>
+      <section className="banner-container">
+        <img className="banner" src={banner} alt="banner">
+          
+          </img>
+
+                   <a href='#prod-container'>
+                     <button className="shop-now">
+            SHOP NOW!
+          </button>
+                   </a>
+          </section>
 
       {showItemDetail && (
         <ItemModal
@@ -81,7 +91,7 @@ const Dashboard = () => {
         <Cart cartItems={cartItems} setCartItems={setCartItems}/>
       } */}
 
-      <section data-testid="products-container" className="products-container">
+      <section data-testid="products-container" id='prod-container'className="products-container">
         <Products
           flopItems={flopItems}
           setCurrID={setCurrID}
