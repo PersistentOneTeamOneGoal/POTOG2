@@ -3,7 +3,7 @@ import flops from "./data";
 import "./Dashboard.css";
 import logo from "./assets/logo-bp.png";
 import logoWhite from "./assets/logo-bp-white3.png";
-import banner from './assets/xmas-sale3.png';
+import banner from "./assets/xmas-sale3.png";
 import {
   FaShoppingCart,
   FaRegPlusSquare,
@@ -54,7 +54,7 @@ const Dashboard = () => {
       <div className="top-nav-bar">SELECTED ITEMS ON SALE! CHECK IT OUT!</div>
       <section className="nav-bar sticky">
         <div className="nav-container">
-        <img className="logo" src={logo} alt="logo"></img>
+          <img className="logo" src={logo} alt="logo"></img>
           <Types types={types} filterItems={filterItems} />
           <button className="cart cart-btn" data-testid="cart-btn">
             <FaShoppingCart />
@@ -62,7 +62,14 @@ const Dashboard = () => {
         </div>
       </section>
 
-      <section className="banner-container"><img className="banner" src={banner} alt="banner"></img></section>
+      <section className="banner-container">
+        <img className="banner" src={banner} alt="banner"></img>
+        <div id="shop-now-container">
+          <a href="#prod-container">
+            <button className="shop-now">SHOP NOW!</button>
+          </a>
+        </div>
+      </section>
 
       {showItemDetail && (
         <ItemModal
@@ -81,7 +88,11 @@ const Dashboard = () => {
         <Cart cartItems={cartItems} setCartItems={setCartItems}/>
       } */}
 
-      <section data-testid="products-container" className="products-container">
+      <section
+        data-testid="products-container"
+        id="prod-container"
+        className="products-container"
+      >
         <Products
           flopItems={flopItems}
           setCurrID={setCurrID}
@@ -110,14 +121,16 @@ const Types = ({ types, filterItems }) => {
     <div className="btn-container">
       {types.map((type, index) => {
         return (
-          <button
-            type="button"
-            className="filter-btn"
-            key={index}
-            onClick={() => filterItems(type)}
-          >
-            {type}
-          </button>
+<a href="#prod-container">
+            <button
+              type="button"
+              className="filter-btn"
+              key={index}
+              onClick={() => filterItems(type)}
+            >
+              {type}
+            </button>
+          </a>
         );
       })}
     </div>
@@ -156,9 +169,9 @@ const Item = ({ item, setCurrID, setShowItemDetail }) => {
     <article
       key={item.id}
       role="products-item"
-      data-testid={`products-item${id}`}  
+      data-testid={`products-item${id}`}
       className="product-item"
-      // onMouseOver={mouseOver}  
+      // onMouseOver={mouseOver}
       // onMouseLeave={mouseOut}
     >
       <div>
@@ -171,17 +184,17 @@ const Item = ({ item, setCurrID, setShowItemDetail }) => {
           {/* <p className="item-text">{desc}</p> */}
         </div>
         {/* {hover && ( */}
-          <button
-            data-testid="look-btn"
-            className="item-button"
-            onClick={() => {
-              setCurrID(id - 1);
-              setShowItemDetail(true);
-            }}
-          >
-            {" "}
-            Quick Look{" "}
-          </button>
+        <button
+          data-testid="look-btn"
+          className="item-button"
+          onClick={() => {
+            setCurrID(id - 1);
+            setShowItemDetail(true);
+          }}
+        >
+          {" "}
+          Quick Look{" "}
+        </button>
         {/* )} */}
       </div>
     </article>
