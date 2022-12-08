@@ -10,12 +10,12 @@ import "@testing-library/jest-dom/extend-expect";
 describe("Checks the Dashboard UI",()=>{
     afterEach(cleanup);
 
-    it("has a quick look button", async ()=>{
-        render(<Dashboard/>)
+    it("has a quick looks button",async ()=>{
+        render(<Dashboard />)
+        
         fireEvent.mouseOver(screen.getByTestId("products-item1"));
-        // eslint-disable-next-line testing-library/await-async-utils
-        waitFor(() => expect(screen.findByTestId("look-btn")).toBeInTheDocument());
-    }); //passed
+        waitFor(()=> expect(screen.getByTestId("look-btn")).toBeInTheDocument());
+    })// passed
 
     it("has a cart button",()=>{
         render(<Dashboard />)
