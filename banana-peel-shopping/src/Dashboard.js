@@ -185,7 +185,7 @@ const Item = ({ item, setCurrID, setShowItemDetail }) => {
         </div>
         {/* {hover && ( */}
         <button
-          data-testid="look-btn"
+          data-testid={`look-btn${id}`}
           className="item-button"
           onClick={() => {
             setCurrID(id - 1);
