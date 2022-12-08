@@ -26,15 +26,19 @@
     grid-template-columns: 15em auto auto;
 }
 
+#text-nav-top{
+	color: #fff!important;
+}
+
 .top-nav-bar:hover{
-	color: var(--black-v2);
+	color: var(--black-v2)!important;
 	cursor: pointer;
 	transition: .2s;
 }
 .top-nav-bar{
 	transition: .2s;
 	background-color:var(--brand-color);
-	color: white;
+	color: white!important;
 	text-decoration: underline;
 	padding: 10px 0px;
 	text-align: center;

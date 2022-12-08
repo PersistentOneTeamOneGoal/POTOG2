@@ -3,7 +3,7 @@ import flops from "./data";
 import "./Dashboard.css";
 import logo from "./assets/logo-bp.png";
 import logoWhite from "./assets/logo-bp-white3.png";
-import banner from "./assets/xmas-sale3.png";
+import banner from "./assets/xmas-sale4.png";
 import {
   FaShoppingCart,
   FaRegPlusSquare,
@@ -51,7 +51,7 @@ const Dashboard = () => {
 
   return (
     <main>
-      <div className="top-nav-bar">SELECTED ITEMS ON SALE! CHECK IT OUT!</div>
+      <div className="top-nav-bar"><a href='#prod-container' id='text-nav-top'>SELECTED ITEMS ON SALE! CHECK IT OUT!</a></div>
       <section className="nav-bar sticky">
         <div className="nav-container">
           <img className="logo" src={logo} alt="logo"></img>
