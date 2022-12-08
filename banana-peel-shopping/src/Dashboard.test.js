@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-promise-in-fire-event */
 /* eslint-disable testing-library/await-async-utils */
 /* eslint-disable testing-library/await-async-query */
 import { cleanup, render, screen, waitFor, fireEvent } from '@testing-library/react';
@@ -23,7 +24,7 @@ describe("Checks the Dashboard UI",()=>{
         expect(cart).toBeInTheDocument();
     }) // passed
 
-    it("has a collection for products",()=>{
+    it("checks for the product",()=>{
         render(<Dashboard />)
         const container=screen.getByTestId("products-container");
         expect(container).toBeInTheDocument();
@@ -39,23 +40,39 @@ describe("Checks the Dashboard UI",()=>{
         render(<Dashboard />)
         const proItem=screen.getAllByRole("products-item");
         expect(proItem).toBeTruthy();
+        expect((proItem).length).toBe(4);
     }) // passed
 
      
 
-    it("displays a modal", async ()=>{
+    it("displays a modal with buttons", async ()=>{
         render(<Dashboard/>)
-        fireEvent.mouseEnter(screen.getByTestId("products-item1"));
+
+        fireEvent.mouseOver(screen.getByTestId("products-item1"));
+        waitFor(()=> expect(screen.getByTestId("look-btn1")).toBeInTheDocument());
+        fireEvent.click(screen.getByTestId('look-btn1'));
         // eslint-disable-next-line testing-library/await-async-utils
         waitFor(() => {
-            const btn = screen.getByTestId("look-btn");
-            // eslint-disable-next-line testing-library/no-wait-for-side-effects
-            fireEvent.click(btn);
-            waitFor(() => expect(screen.getByTestId("modal")).toBeInTheDocument());
+            // const btn = screen.getByTestId("look-btn");
+            const modal = screen.getByTestId("modal");
+            waitFor(()=> expect(modal).toBeInTheDocument());
+// expect(await screen.getByTestId("modal")).toHaveTextContent(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consequat a turpis non maximus. Praesent tincidunt vitae risus in maximus. Duis efficitur porta lorem vel dapibus. In sed justo sagittis, mollis diam eget, facilisis erat. `)
+            const modalbuybtn = screen.getByTestId("buy-btn");
+            waitFor(()=>expect(modalbuybtn).toBeInTheDocument());
+            // // eslint-disable-next-line testing-library/no-wait-for-side-effects
+            // fireEvent.click(btn);
+            // waitFor(() => expect(screen.getByTestId("modal")).toBeInTheDocument());
         }); 
-    
         
     }); 
+    it("displays item description in the modal", ()=>{
+        render(<Dashboard />)
+
+        fireEvent.mouseOver(screen.getByTestId("products-item1"));
+        waitFor(()=> expect(screen.getByTestId("look-btn1")).toBeInTheDocument());
+        fireEvent.click(screen.getByTestId('look-btn1'));
+        expect(screen.getByTestId("modal")).toHaveTextContent(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consequat a turpis non maximus. Praesent tincidunt vitae risus in maximus. Duis efficitur porta lorem vel dapibus. In sed justo sagittis, mollis diam eget, facilisis erat. `)
+    })
     // it("has products in the dashboard",()=>{
     //     render(<Dashboard />)
 
