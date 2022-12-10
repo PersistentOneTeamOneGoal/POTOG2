@@ -1,30 +1,32 @@
-import React, { useRef, useState } from "react";
-import flops from "./data";
+/* eslint-disable jsx-a11y/aria-role */
+import React, { useRef, useState, useContext } from "react";
+import flops from "../../data";
 import "./Dashboard.css";
-import logo from "./assets/logo-bp.png";
-import logoWhite from "./assets/logo-bp-white3.png";
-import banner from "./assets/xmas-sale4.png";
+import Cart from "../cart/Cart";
+import logo from "../../assets/logo-bp.png";
+import logoWhite from "../../assets/logo-bp-white3.png";
+import banner from "../../assets/xmas-sale4.png";
 import {
   FaShoppingCart,
   FaRegPlusSquare,
   FaRegMinusSquare,
 } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
-
-// import Cart from './Cart';
-
-const allTypes = ["ALL", ...new Set(flops.map((flop) => flop.type))];
+import { ShopContext } from "../../context/itemsContext";
 
 const Dashboard = () => {
-  const [flopItems, setFlopItems] = useState(flops);
+  //Contexts
+  const { flopItemsContext, currIDContext, cartItemsContext } = useContext(ShopContext);
+  const [flopItems, setFlopItems] = flopItemsContext;
+  const [currID, setCurrID] = currIDContext;
+  const [cartItems, setCartItems] = cartItemsContext;
+  //Local States
   const [showItemDetail, setShowItemDetail] = useState(false);
-  const [currID, setCurrID] = useState(0);
-  const [types, setTypes] = useState(allTypes);
-  const [cartItems, setCartItems] = useState([]);
   const [showCart, setShowCart] = useState(false);
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(0);  
   const count = useRef();
 
+  //For filtering items by type
   const filterItems = (type) => {
     if (type === "ALL") {
       setFlopItems(flops);
@@ -34,6 +36,7 @@ const Dashboard = () => {
     setFlopItems(newItems);
   };
 
+  //Add cart items
   const addCartItems = () => {
     flopItems[currID].qty = flopItems[currID].qty + qty;
 
@@ -50,18 +53,23 @@ const Dashboard = () => {
   console.log(cartItems);
 
   return (
+    //Main container for the whole dashboard app
     <main>
+      {/*Current Nav Banner*/}
       <div className="top-nav-bar"><a href='#prod-container' id='text-nav-top'>SELECTED ITEMS ON SALE! CHECK IT OUT!</a></div>
+      
+      {/*Navigation Bar*/}
       <section className="nav-bar sticky">
         <div className="nav-container">
           <img className="logo" src={logo} alt="logo"></img>
-          <Types types={types} filterItems={filterItems} />
-          <button className="cart cart-btn" data-testid="cart-btn">
+          <Types filterItems={filterItems} />
+          <button className="cart cart-btn" data-testid="cart-btn" onClick={() => setShowCart(true)}>
             <FaShoppingCart />
           </button>
         </div>
       </section>
 
+      {/*Promotional Banner*/}
       <section className="banner-container">
         <img className="banner" src={banner} alt="banner"></img>
         <div id="shop-now-container">
@@ -71,8 +79,7 @@ const Dashboard = () => {
         </div>
       </section>
 
-      
-
+      {/*Specific Item Modal*/}
       {showItemDetail && (
         <ItemModal
           qty={qty}
@@ -85,24 +92,24 @@ const Dashboard = () => {
         />
       )}
 
-      {/* {
+      {/*Testing Cart*/}
+      {
         showCart &&
         <Cart cartItems={cartItems} setCartItems={setCartItems}/>
-      } */}
+      } 
 
+      {/*Product Container and Items*/}
       <section
         data-testid="products-container"
         id="prod-container"
         className="products-container"
       >
-        <h3 id='title-product'>LOOK INTO OUR LATEST PRODUCTS!</h3>
         <Products
-          flopItems={flopItems}
-          setCurrID={setCurrID}
           setShowItemDetail={setShowItemDetail}
         />
       </section>
 
+      {/*Footer*/}
       <footer className="footer-container">
         <div className="footer-main">
           <img className="logo footer-logo" src={logoWhite} alt="logo"></img>
@@ -119,12 +126,16 @@ const Dashboard = () => {
   );
 };
 
-const Types = ({ types, filterItems }) => {
+//For type buttons
+const Types = ({ filterItems }) => {
+  const { typesContext } = useContext(ShopContext);
+  const [ types ] = typesContext;
+
   return (
     <div className="btn-container">
       {types.map((type, index) => {
         return (
-<a href="#prod-container">
+          <a href="#prod-container" key={index}>
             <button
               type="button"
               className="filter-btn"
@@ -140,14 +151,17 @@ const Types = ({ types, filterItems }) => {
   );
 };
 
-const Products = ({ flopItems, setCurrID, setShowItemDetail }) => {
+//For products container
+const Products = ({ setShowItemDetail }) => {
+  const { flopItemsContext } = useContext(ShopContext);
+  const [ flopItems ] = flopItemsContext;
+
   return (
     <div className="products-section">
       {flopItems.map((flopItem, key) => {
         return (
           <Item
             item={flopItem}
-            setCurrID={setCurrID}
             setShowItemDetail={setShowItemDetail}
           />
         );
@@ -156,17 +170,13 @@ const Products = ({ flopItems, setCurrID, setShowItemDetail }) => {
   );
 };
 
-const Item = ({ item, setCurrID, setShowItemDetail }) => {
-  // const [hover, setHover] = useState(false);
+//For product items
+const Item = ({ item, setShowItemDetail }) => {
+  const { currIDContext } = useContext(ShopContext);
+  // eslint-disable-next-line no-unused-vars
+  const [currID, setCurrID ] = currIDContext;
+
   const { id, title, img, price } = item;
-
-  // const mouseOver = (event) => {
-  //   setHover(true);
-  // };
-
-  // const mouseOut = (event) => {
-  //   setHover(false);
-  // };
 
   return (
     <article
@@ -174,8 +184,6 @@ const Item = ({ item, setCurrID, setShowItemDetail }) => {
       role="products-item"
       data-testid={`products-item${id}`}
       className="product-item"
-      // onMouseOver={mouseOver}
-      // onMouseLeave={mouseOut}
     >
       <div>
         <img src={img} alt={title} className="item-img" />
@@ -184,9 +192,7 @@ const Item = ({ item, setCurrID, setShowItemDetail }) => {
             <h4>{title}</h4>
             <h4 className="price">${price}</h4>
           </header>
-          {/* <p className="item-text">{desc}</p> */}
         </div>
-        {/* {hover && ( */}
         <button
           data-testid={`look-btn${id}`}
           className="item-button"
@@ -207,13 +213,14 @@ const Item = ({ item, setCurrID, setShowItemDetail }) => {
 const ItemModal = ({
   qty,
   setQty,
-  flopItems,
-  currID,
   setShowItemDetail,
-  showCartPrice,
   count,
   addCartItems,
 }) => {
+  const { flopItemsContext, currIDContext} = useContext(ShopContext);
+  const [flopItems] = flopItemsContext;
+  const [currID] = currIDContext;
+
   return (
     <div data-testid="modal" className="lightbox-overlay">
       <div className="lightbox">
@@ -259,7 +266,7 @@ const ItemModal = ({
               <FaRegMinusSquare />
             </button>
             <input
-              type="text"
+              type="number"
               className="itemQty"
               value={qty}
               ref={count}
