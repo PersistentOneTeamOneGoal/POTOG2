@@ -71,6 +71,8 @@ const Dashboard = () => {
         </div>
       </section>
 
+      
+
       {showItemDetail && (
         <ItemModal
           qty={qty}
@@ -93,6 +95,7 @@ const Dashboard = () => {
         id="prod-container"
         className="products-container"
       >
+        <h3 id='title-product'>LOOK INTO OUR LATEST PRODUCTS!</h3>
         <Products
           flopItems={flopItems}
           setCurrID={setCurrID}
