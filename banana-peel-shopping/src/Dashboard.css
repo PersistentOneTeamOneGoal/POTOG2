@@ -17,7 +17,7 @@
 	border-bottom: 1px solid;
 	position: sticky;
 	top: 0;
-	z-index: 1000;
+	z-index: 1;
 }
 
 .nav-container{
@@ -298,6 +298,7 @@
 	font-size: 25px;
 }
 
+
 .item-img {
 	height: 25vh;
 	width: 25vh;
@@ -344,6 +345,10 @@ h4 {
 	left: 7em;
 	font-family: Baskerville, Baskerville Old Face, Garamond, Times New Roman, serif;
 	font-size: 2em;
+}
+
+#title-product{
+
 }
 
 
