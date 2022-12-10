@@ -28,6 +28,6 @@ const Cart = ({cartItems, setCartItems}) => {
     );
 }
 
-const CartItem = {}
+const CartItem = ({})
 
 export default Cart;   
