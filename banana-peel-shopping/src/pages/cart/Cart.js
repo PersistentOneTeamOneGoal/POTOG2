@@ -1,5 +1,4 @@
 import React, {  } from 'react';
-import flops from '../../data';
 import logo from '../../assets/bananapeel-loaders.png';
 
 const Cart = ({cartItems, setCartItems}) => {
