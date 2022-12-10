@@ -18,6 +18,7 @@ const allTypes = ["ALL", ...new Set(flops.map((flop) => flop.type))];
 const Dashboard = () => {
   const [flopItems, setFlopItems] = useState(flops);
   const [currID, setCurrID] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [types, setTypes] = useState(allTypes);
   const [cartItems, setCartItems] = useState([]);
   //Local States
@@ -182,7 +183,7 @@ const Item = ({ item, setCurrID, setShowItemDetail }) => {
       className="product-item"
     >
       <div>
-        <img src={img} alt={title} className="item-img" />
+        <img src={img[0]} alt={title} className="item-img" />
         <div className="item-info">
           <header>
             <h4>{title}</h4>
@@ -215,7 +216,7 @@ const ItemModal = ({
   setShowItemDetail,
   addCartItems,
 }) => {
-
+  const [currImg, setCurrImg] = useState(0);
   return (
     <div data-testid="modal" className="lightbox-overlay">
       <div className="lightbox">
@@ -228,11 +229,23 @@ const ItemModal = ({
         >
           <MdOutlineClose />
         </button>
-        <img
-          src={flopItems[currID].img}
-          alt={flopItems[currID].title}
-          className="item-img slipper-img"
-        />
+        <div className="item-img-container">
+          <img
+            src={flopItems[currID].img[currImg]}
+            alt={flopItems[currID].title}
+            className="item-img slipper-img"
+          />
+          {flopItems[currID].img.map((flopImg, index) => {
+            return (
+              <img
+                src={flopItems[currID].img[index]}
+                alt={flopItems[currID].title}
+                onClick={() => {setCurrImg(index)}}
+                className="item-img slipper-img"
+              />
+            );
+          })}
+        </div>
         <div className="item-info">
           <header>
             <h4 className="flop-title">{flopItems[currID].title}</h4>

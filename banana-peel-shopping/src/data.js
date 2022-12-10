@@ -11,7 +11,7 @@ const flops = [
       type: 'MEN',
       price: 15.99,
       qty: 0,
-      img: menFlops,
+      img: [menFlops, child1Flops],
       desc: `
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consequat a turpis non maximus. Praesent tincidunt vitae risus in maximus. Duis efficitur porta lorem vel dapibus. In sed justo sagittis, mollis diam eget, facilisis erat. `,
     },
@@ -22,7 +22,7 @@ const flops = [
       type: 'WOMEN',
       price: 13.99,
       qty: 0,
-      img: womenFlops,
+      img: [womenFlops, child1Flops],
       desc: `
       Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer ut varius metus. Mauris non ex fringilla, iaculis sem ac, fringilla nulla. Sed mattis blandit iaculis.`,
     },
@@ -33,7 +33,7 @@ const flops = [
       type: 'KIDS',
       price: 6.99,
       qty: 0,
-      img: child1Flops,
+      img: [child1Flops, child2Flops],
       desc: `Suspendisse feugiat id velit non accumsan. Duis eu molestie arcu. Nunc eu mauris non magna molestie convallis vel tristique tortor. Aenean a est fringilla, pellentesque enim quis, rutrum quam`,
     },
     {
@@ -43,7 +43,7 @@ const flops = [
       type: 'KIDS',
       price: 20.99,
       qty: 0,
-      img: child2Flops,
+      img: [child2Flops, child1Flops],
       desc: `Phasellus pellentesque odio elit, in semper ante bibendum eget. Sed et elit sed velit auctor scelerisque vehicula vel ipsum. Mauris tincidunt velit at magna maximus pulvinar. Suspendisse eu nunc sollicitudin, hendrerit ligula sed, convallis purus. `,
     },
     
