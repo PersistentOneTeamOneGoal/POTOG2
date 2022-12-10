@@ -1,9 +1,8 @@
 /* eslint-disable testing-library/await-async-utils */
 /* eslint-disable testing-library/await-async-query */
 import { cleanup, render, screen, waitFor, fireEvent } from '@testing-library/react';
-import Dashboard from './Dashboard.js';
+import Dashboard, {Products, Item} from './Dashboard.js';
 import "@testing-library/jest-dom/extend-expect";
-
 
 describe("Checks the Dashboard UI",()=>{
     afterEach(cleanup);

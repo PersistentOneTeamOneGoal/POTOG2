@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/aria-role */
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState } from "react";
 import flops from "../../data";
 import "./Dashboard.css";
 import Cart from "../cart/Cart";
@@ -12,14 +12,14 @@ import {
   FaRegMinusSquare,
 } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
-import { ShopContext } from "../../context/itemsContext";
+
+const allTypes = ["ALL", ...new Set(flops.map((flop) => flop.type))];
 
 const Dashboard = () => {
-  //Contexts
-  const { flopItemsContext, currIDContext, cartItemsContext } = useContext(ShopContext);
-  const [flopItems, setFlopItems] = flopItemsContext;
-  const [currID, setCurrID] = currIDContext;
-  const [cartItems, setCartItems] = cartItemsContext;
+  const [flopItems, setFlopItems] = useState(flops);
+  const [currID, setCurrID] = useState(0);
+  const [types, setTypes] = useState(allTypes);
+  const [cartItems, setCartItems] = useState([]);
   //Local States
   const [showItemDetail, setShowItemDetail] = useState(false);
   const [showCart, setShowCart] = useState(false);
@@ -62,7 +62,7 @@ const Dashboard = () => {
       <section className="nav-bar sticky">
         <div className="nav-container">
           <img className="logo" src={logo} alt="logo"></img>
-          <Types filterItems={filterItems} />
+          <Types types={types} filterItems={filterItems} />
           <button className="cart cart-btn" data-testid="cart-btn" onClick={() => setShowCart(true)}>
             <FaShoppingCart />
           </button>
@@ -105,6 +105,8 @@ const Dashboard = () => {
         className="products-container"
       >
         <Products
+          flopItems={flopItems}
+          setCurrID={setCurrID}
           setShowItemDetail={setShowItemDetail}
         />
       </section>
@@ -127,9 +129,7 @@ const Dashboard = () => {
 };
 
 //For type buttons
-const Types = ({ filterItems }) => {
-  const { typesContext } = useContext(ShopContext);
-  const [ types ] = typesContext;
+const Types = ({ types, filterItems }) => {
 
   return (
     <div className="btn-container">
@@ -152,9 +152,7 @@ const Types = ({ filterItems }) => {
 };
 
 //For products container
-const Products = ({ setShowItemDetail }) => {
-  const { flopItemsContext } = useContext(ShopContext);
-  const [ flopItems ] = flopItemsContext;
+const Products = ({ flopItems, setCurrID, setShowItemDetail }) => {
 
   return (
     <div className="products-section">
@@ -162,6 +160,7 @@ const Products = ({ setShowItemDetail }) => {
         return (
           <Item
             item={flopItem}
+            setCurrID={setCurrID}
             setShowItemDetail={setShowItemDetail}
           />
         );
@@ -171,10 +170,7 @@ const Products = ({ setShowItemDetail }) => {
 };
 
 //For product items
-const Item = ({ item, setShowItemDetail }) => {
-  const { currIDContext } = useContext(ShopContext);
-  // eslint-disable-next-line no-unused-vars
-  const [currID, setCurrID ] = currIDContext;
+const Item = ({ item, setCurrID, setShowItemDetail }) => {
 
   const { id, title, img, price } = item;
 
@@ -213,13 +209,12 @@ const Item = ({ item, setShowItemDetail }) => {
 const ItemModal = ({
   qty,
   setQty,
-  setShowItemDetail,
+  flopItems,
+  currID,
   count,
+  setShowItemDetail,
   addCartItems,
 }) => {
-  const { flopItemsContext, currIDContext} = useContext(ShopContext);
-  const [flopItems] = flopItemsContext;
-  const [currID] = currIDContext;
 
   return (
     <div data-testid="modal" className="lightbox-overlay">

@@ -7,9 +7,7 @@ import Provider from './context/itemsContext';
 function App() {
 
   return (
-    <Provider>
       <Dashboard/>
-    </Provider>
   );
 }
 
