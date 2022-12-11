@@ -1,13 +1,14 @@
 import menFlops from './assets/menFlops.png';
 import womenFlops from './assets/womenFlops.png';
-import child1Flops from './assets/child1Flops.png'
-import child2Flops from './assets/child2Flops.png'
+import child1Flops from './assets/child1Flops.png';
+import child2Flops from './assets/child2Flops.png';
 
 const flops = [
     {
       id: 1,
       title: 'yonder - dispotic',
-      status:false,
+      status: false,
+      checked: false,
       type: 'MEN',
       price: 15.99,
       qty: 0,
@@ -18,7 +19,8 @@ const flops = [
     {
       id: 2,
       title: 'bohemian dreams - red',
-      status:false,
+      status: false,
+      checked: false,
       type: 'WOMEN',
       price: 13.99,
       qty: 0,
@@ -29,7 +31,8 @@ const flops = [
     {
       id: 3,
       title: 'hopscotch - pool blue',
-      status:false,
+      status: false,
+      checked: false,
       type: 'KIDS',
       price: 6.99,
       qty: 0,
@@ -39,7 +42,8 @@ const flops = [
     {
       id: 4,
       title: 'portobello - beary cute',
-      status:false,
+      status: false,
+      checked: false,
       type: 'KIDS',
       price: 20.99,
       qty: 0,
