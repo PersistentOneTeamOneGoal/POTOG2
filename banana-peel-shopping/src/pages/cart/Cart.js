@@ -7,7 +7,7 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FaRegMinusSquare, FaRegPlusSquare } from "react-icons/fa";
 
 const Cart = ({ cartItems, setCartItems, checkedItems, setCheckedItems, itemTotal, setItemTotal }) => {
-    const itemTot = checkedItems.reduce((total, obj) => (obj.price * obj.qty) + total,0);
+    const itemTot = checkedItems.reduce((total, obj) => (obj.price * obj.qty) + total, 0);
     setItemTotal(itemTot);
 
     return (
@@ -193,9 +193,5 @@ const CartItem = ({ item, index, cartItems, checkedItems, setCartItems, setCheck
     </div>
   );
 };
-
-const ItemCount = () => {
-
-}
 
 export default Cart;

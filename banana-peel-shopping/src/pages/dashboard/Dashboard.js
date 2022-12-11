@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import flops from "../../data";
 import "./Dashboard.css";
 import Cart from "../cart/Cart";
-import { Link, Route, Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from "../../assets/logo-bp.png";
 import logoWhite from "../../assets/logo-bp-white3.png";
 import banner from "../../assets/xmas-sale4.png";
