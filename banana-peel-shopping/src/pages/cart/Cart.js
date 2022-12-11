@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import "./Cart.css";
 import logo from "../../assets/logo-bp.png";
-import { BiHomeCircle } from "react-icons/bi"
+import { BiHomeCircle } from "react-icons/bi";
+import { AiOutlineCheckCircle } from "react-icons/ai"
 
 const Cart = ({ cartItems, setCartItems, checkedItems, setCheckedItems, itemTotal, setItemTotal }) => {
     const itemTot = checkedItems.reduce((total, obj) => (obj.price * obj.qty) + total,0);
@@ -58,7 +59,7 @@ const Cart = ({ cartItems, setCartItems, checkedItems, setCheckedItems, itemTota
 };
 
 const CartItem = ({ item, index, cartItems, checkedItems, setCartItems, setCheckedItems }) => {
-  const { id, title, checked, status, type, price, qty, img, desc } = item;
+  const { title, price, qty, img, desc } = item;
   const [currImg, setCurrImg] = useState(0);
   const [currIndex, setCurrIndex] = useState(0);
 
@@ -100,18 +101,18 @@ const CartItem = ({ item, index, cartItems, checkedItems, setCartItems, setCheck
 
   return (
     <div>
-      <button onClick={addCheckedItem}>+</button>
+      <button onClick={addCheckedItem}><AiOutlineCheckCircle/></button>
       <div className="item-img-container">
         <img
-          src={item.img[currImg]}
-          alt={item.title}
+          src={img[currImg]}
+          alt={title}
           className="item-img slipper-img"
         />
         {item.img.map((flopImg, index) => {
           return (
             <img
-              src={item.img[index]}
-              alt={item.title}
+              src={img[index]}
+              alt={title}
               onClick={() => {
                 setCurrImg(index);
               }}
@@ -126,11 +127,11 @@ const CartItem = ({ item, index, cartItems, checkedItems, setCartItems, setCheck
             <h4>{title}</h4>
             <h4 className="price">Unit Price: ${price}</h4>
           </header>
-          <p className="item-text desc">{item.desc}</p>
+          <p className="item-text desc">{desc}</p>
           <div>
-            <h4>Current item: {item.qty}</h4>
+            <h4>Current item: {qty}</h4>
             <h4 className="price">
-              Total: ${Number((item.price * item.qty).toFixed(2))}
+              Total: ${Number((price * qty).toFixed(2))}
             </h4>
           </div>
         </div>
