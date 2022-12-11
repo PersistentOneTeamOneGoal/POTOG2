@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import flops from "../../data";
 import "./Dashboard.css";
 import Cart from "../cart/Cart";
+import { Link } from 'react-router-dom';
 import logo from "../../assets/logo-bp.png";
 import logoWhite from "../../assets/logo-bp-white3.png";
 import banner from "../../assets/xmas-sale4.png";
@@ -15,12 +16,11 @@ import { MdOutlineClose } from "react-icons/md";
 
 const allTypes = ["ALL", ...new Set(flops.map((flop) => flop.type))];
 
-const Dashboard = () => {
+const Dashboard = ({cartItems, setCartItems}) => {
   const [flopItems, setFlopItems] = useState(flops);
   const [currID, setCurrID] = useState(0);
   // eslint-disable-next-line no-unused-vars
   const [types, setTypes] = useState(allTypes);
-  const [cartItems, setCartItems] = useState([]);
   //Local States
   const [showItemDetail, setShowItemDetail] = useState(false);
   const [showCart, setShowCart] = useState(false);
@@ -52,6 +52,7 @@ const Dashboard = () => {
       : setCartItems([...cartItems]);
   };
   console.log(cartItems);
+  //console.log(flopItems);
 
   return (
     //Main container for the whole dashboard app
@@ -64,9 +65,11 @@ const Dashboard = () => {
         <div className="nav-container">
           <img className="logo" src={logo} alt="logo"></img>
           <Types types={types} filterItems={filterItems} />
-          <button className="cart cart-btn" data-testid="cart-btn" onClick={() => setShowCart(true)}>
-            <FaShoppingCart />
-          </button>
+          <Link to='/Cart'>
+            <button className="cart cart-btn" data-testid="cart-btn" onClick={() => setShowCart(true)}>
+              <FaShoppingCart />
+            </button>
+          </Link>
         </div>
       </section>
 
