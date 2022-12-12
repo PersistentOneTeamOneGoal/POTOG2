@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/aria-role */
 import React, { useRef, useState } from "react";
 import flops from "../../data";
-import "./Dashboard.css";
+import "./Dashboard.scss";
 import Cart from "../cart/Cart";
 import { Link } from 'react-router-dom';
 import logo from "../../assets/logo-bp.png";

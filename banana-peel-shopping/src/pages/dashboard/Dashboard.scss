@@ -1,0 +1,321 @@
+:root {
+  --radius: 10px;
+  --buy-btn: #00e600;
+  --brand-color: #ffb701;
+  --white-v2: hsl(280, 18%, 97%);
+  --black-v2: #1f1f1f;
+  --grey-v2: #969696;
+}
+.nav-bar {
+  background-color: #fff;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  width: 100%;
+  padding: 25px 0px;
+  border-bottom: 1px solid;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.nav-container {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 15em auto auto;
+}
+#text-nav-top {
+  color: #fff !important;
+}
+.top-nav-bar {
+  transition: 0.2s;
+  background-color: var(--brand-color);
+  color: white !important ;
+  text-decoration: underline;
+  padding: 10px 0px;
+  text-align: center;
+  letter-spacing: 2px;
+  &:hover {
+    color: var(--black-v2) !important ;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+}
+.banner {
+  width: -webkit-fill-available;
+}
+
+.header {
+  margin: 0;
+  background-color: #ffb701;
+}
+.product-item {
+  border-radius: var(--radius);
+  width: 12em;
+  height: auto;
+  background-color: #fff;
+  padding: 20px;
+  margin: 10px;
+  font-size: 12pt;
+  &:hover {
+    box-shadow: -1px 5px 9px -3px rgba(0, 0, 0, 0.72);
+    -webkit-box-shadow: -1px 5px 9px -3px rgba(0, 0, 0, 0.72);
+    -moz-box-shadow: -1px 5px 9px -3px rgba(0, 0, 0, 0.72);
+  }
+  .item-button {
+    display: block;
+  }
+}
+
+.products-container {
+  background-color: var(--white-v2);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+.btn-container {
+  width: fit-content !important ;
+  margin-left: auto;
+  margin-right: auto;
+}
+.buy-btn-container {
+  margin-left: auto !important ;
+  margin-right: auto !important ;
+  display: table;
+}
+.itemQty {
+  width: 30px;
+  border-style: none;
+  outline: none;
+  text-align: -webkit-center;
+  font-size: 1em;
+  font-weight: 600;
+}
+.buyItem {
+  display: block;
+  width: -webkit-fill-available;
+  padding: 5px !important ;
+  outline: solid !important ;
+  font-weight: 600 !important ;
+  color: black !important ;
+}
+.buy-btn {
+  vertical-align: middle;
+  text-align: center;
+  margin: 10px;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  font-size: 25px;
+}
+.filter-btn:hover,
+#cart,
+.item-button:hover,
+.buy-btn:hover {
+  color: var(--brand-color) !important ;
+  transition: 0.2s;
+}
+.filter-btn {
+  transition: 0.5s;
+  margin: 0px 20px;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  color: var(--black-v2);
+  font-size: 18px;
+  font-weight: 700;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+#cart {
+  transition: 0.5s;
+  top: 8px;
+  margin-right: 30px;
+  position: relative;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.btn-categories {
+  margin-right: 70px;
+  top: 15px;
+}
+.cart-btn {
+  transition: 0.5s;
+  margin: 0px 20px;
+  background: none;
+  color: inherit;
+  border: none;
+  top: 25px;
+  padding: 0;
+  position: absolute;
+  right: 30px;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.item-button {
+  display: none;
+  position: relative;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 10px 0px;
+  font: inherit;
+  cursor: pointer;
+  outline: solid !important ;
+  color: black;
+  font-size: 18px;
+  font-weight: 700;
+  width: 100% !important ;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.shop-now {
+  transition: 0.2s;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 10px 0px;
+  font: inherit;
+  cursor: pointer;
+  outline: solid !important ;
+  color: black;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 5px 10px;
+  &:hover {
+    color: white;
+    transition: 0.2s;
+  }
+}
+#shop-now-container {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  top: 67%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.products-section {
+  margin: 10vh;
+  text-transform: capitalize;
+  display: grid;
+  padding: 12px;
+  grid-template-columns: auto auto auto auto;
+  align-items: center;
+}
+.slipper-img {
+  width: 25em !important ;
+  height: 25em !important ;
+}
+.desc {
+  width: 25em;
+}
+.lightbox {
+  border-radius: var(--radius);
+  z-index: 99;
+  position: absolute;
+  background-color: #fff;
+  width: auto;
+  padding: 3em;
+  display: flex;
+  left: 20%;
+  top: 10%;
+  opacity: 1;
+}
+.exitItem {
+  transition: 0.5s;
+  top: 10px;
+  right: -10px;
+  margin-right: 30px;
+  position: relative;
+  background: none;
+  color: var(--grey-v2);
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  font-size: 2em;
+  outline: inherit;
+  position: absolute;
+  &:hover {
+    color: var(--black-v2);
+  }
+}
+.lightbox-overlay {
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgb(0, 0, 0, 50%);
+}
+.flop-title {
+  font-size: 25px;
+}
+.item-img {
+  height: 25vh;
+  width: 25vh;
+}
+h4 {
+  text-transform: capitalize;
+}
+.logo {
+  left: 40px;
+  width: 10em;
+  position: relative;
+}
+.footer-main {
+  position: inherit;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: -30px;
+  height: 20em;
+  background-color: var(--black-v2);
+  color: white;
+}
+.footer-copyright {
+  margin-top: -10px;
+  position: inherit;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2em;
+  background-color: var(--black-v2);
+  color: #808080;
+  text-align: center;
+}
+.footer-logo {
+  padding-top: 85px;
+  left: 5em;
+  width: 30em;
+  position: absolute;
+}
+#bp-slogan {
+  margin: 0;
+  padding-top: 180px;
+  position: absolute;
+  left: 7em;
+  font-family: Baskerville, Baskerville Old Face, Garamond, Times New Roman,
+    serif;
+  font-size: 2em;
+}
