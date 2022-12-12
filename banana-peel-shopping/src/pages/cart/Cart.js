@@ -154,6 +154,7 @@ const CartItem = ({ item, index, cartItems, checkedItems, setCartItems, setCheck
                 });
             }}
             >
+            {/**sad */}
               <FaRegMinusSquare />
             </button>
             <input
