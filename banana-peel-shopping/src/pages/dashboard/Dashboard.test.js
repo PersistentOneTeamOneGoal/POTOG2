@@ -1,3 +1,5 @@
+/* eslint-disable testing-library/no-wait-for-side-effects */
+/* eslint-disable testing-library/no-wait-for-multiple-assertions */
 /* eslint-disable testing-library/await-async-utils */
 /* eslint-disable testing-library/await-async-query */
 import { cleanup, render, screen, waitFor, fireEvent } from '@testing-library/react';
@@ -55,11 +57,7 @@ describe("Checks the Dashboard UI",()=>{
             const modalbuybtn = screen.getByTestId("buy-btn");
             waitFor(()=>expect(modalbuybtn).toBeInTheDocument());
         });
-        
-        
-    
-        
-    }); 
+    }); // passed
 
     it("displays item description in the modal", async ()=>{
         render(<Dashboard />, {wrapper: MemoryRouter})
@@ -70,27 +68,42 @@ describe("Checks the Dashboard UI",()=>{
         expect(screen.getByTestId("modal")).toBeInTheDocument();
         expect(screen.getByTestId("modal")).toHaveTextContent(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consequat a turpis non maximus. Praesent tincidunt vitae risus in maximus. Duis efficitur porta lorem vel dapibus. In sed justo sagittis, mollis diam eget, facilisis erat. `)
     });
-    // it("has products in the dashboard",()=>{
-    //     render(<Dashboard />)
 
-        
-    // })
+    it("has a button for adding and subtracting item quantity", async ()=>{
+        render(<Dashboard />, {wrapper: MemoryRouter})
 
-    // it("has a buy button", ()=>{
-    //     render(<Dashboard />)
-    //     const buy =screen.getByTestId("buy-btn", {name: /BUY/i,hidden:true });
-    //     expect(buy).toHaveClass(buyItem);
-    // }) //not sure how to test hidden buttons
+        fireEvent.mouseOver(screen.getByTestId("products-item1"));
+        waitFor(()=> expect(screen.getByTestId("look-btn1")).toBeInTheDocument());
+        fireEvent.click(screen.getByTestId('look-btn1'));
+        expect(screen.getByTestId("modal")).toBeInTheDocument();
+        waitFor(() => {
+            const modal = screen.getByTestId("modal");
+            expect(modal).toBeInTheDocument();
+            const minus = screen.getByTestId("minus-btn");
+            expect(minus).toBeInTheDocument();
+            const plus = screen.getByTestId("plus-btn");
+            expect(plus).toBeInTheDocument();
+        });
+    }); // passed
 
-    // it("Checks the number of products in the dashboard",()=>{
-    //     render(<Dashboard />)
-    //     expect(screen.findByText('bohemian dreams - light red')).toBeInTheDocument();
-    //     expect(screen.getByTestId('prodcuts').length).toBe(4);
-    // }) //not sure pako ani
+    it("Displays the item quantity",async()=>{
+        render(<Dashboard />, {wrapper: MemoryRouter})
 
-    // it("has a buy button",()=>{
-    //     render(<Dashboard />)
-    //     const buy=screen.getByTestId("buy-btn");
-    //     expect(buy).toBeInTheDocument();
-    // })
+        fireEvent.mouseOver(screen.getByTestId("products-item1"));
+        waitFor(()=> expect(screen.getByTestId("look-btn1")).toBeInTheDocument());
+        fireEvent.click(screen.getByTestId("look-btn1"));
+        expect(screen.getByTestId("modal")).toBeInTheDocument();
+        waitFor(()=>{
+            const qty = screen.getByTestId("itemQty");
+            expect(qty).toBeInTheDocument();
+            const minus = screen.getByTestId("minus-btn");
+            expect(minus).toBeInTheDocument();
+            const plus = screen.getByTestId("plus-btn");
+            expect(plus).toBeInTheDocument();
+            fireEvent.click(plus);
+            expect(qty).toHaveTextContent("1");
+            fireEvent.click(minus);
+            expect(qty).toHaveTextContent("0");
+        })
+    }); // passed
 })
