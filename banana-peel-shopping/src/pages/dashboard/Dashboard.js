@@ -23,7 +23,7 @@ const Dashboard = ({cartItems, setCartItems}) => {
   const [types, setTypes] = useState(allTypes);
   //Local States
   const [showItemDetail, setShowItemDetail] = useState(false);
-  const [showCart, setShowCart] = useState(false);
+  // const [showCart, setShowCart] = useState(false);
   const [qty, setQty] = useState(0);  
   const count = useRef();
 
@@ -59,14 +59,14 @@ const Dashboard = ({cartItems, setCartItems}) => {
     <main>
       {/*Current Nav Banner*/}
       <div className="top-nav-bar"><a href='#prod-container' id='text-nav-top'>SELECTED ITEMS ON SALE! CHECK IT OUT!</a></div>
-      
+
       {/*Navigation Bar*/}
       <section className="nav-bar sticky">
         <div className="nav-container">
           <img className="logo" src={logo} alt="logo"></img>
           <Types types={types} filterItems={filterItems} />
           <Link to='/Cart'>
-            <button className="cart cart-btn" data-testid="cart-btn" onClick={() => setShowCart(true)}>
+            <button className="cart cart-btn" data-testid="cart-btn">
               <FaShoppingCart />
             </button>
           </Link>
@@ -97,10 +97,10 @@ const Dashboard = ({cartItems, setCartItems}) => {
       )}
 
       {/*Testing Cart*/}
-      {
+      {/* {
         showCart &&
-        <Cart cartItems={cartItems} setCartItems={setCartItems}/>
-      } 
+        <Cart cartItems={cartItems} setCartItems={setCartItems} checkedItems={checkedItems} setCheckedItems={setCheckedItems} itemTotal={itemTotal} setItemTotal={setItemTotal} screen={screen} setScreen={screen}/>
+      }  */}
 
       {/*Product Container and Items*/}
       <section

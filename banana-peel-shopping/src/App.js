@@ -10,12 +10,13 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
   const [itemTotal, setItemTotal] = useState(0);
+  
   return (
     
     <Routes>
       <Route path='/' element={<Dashboard cartItems={cartItems} setCartItems={setCartItems}/>} />
       <Route path='/Cart' element={<Cart cartItems={cartItems} setCartItems={setCartItems} checkedItems={checkedItems} setCheckedItems={setCheckedItems} itemTotal={itemTotal} setItemTotal={setItemTotal}/>} />
-      <Route path='/Checkout' element={<Checkout/>} />
+      <Route path='/Checkout' element={<Checkout checkedItems={checkedItems} setCheckedItems={setCheckedItems}/>} />
     </Routes>
   );
 }
