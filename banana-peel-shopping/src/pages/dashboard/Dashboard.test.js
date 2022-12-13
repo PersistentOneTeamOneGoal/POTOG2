@@ -4,6 +4,7 @@
 /* eslint-disable testing-library/await-async-query */
 import { cleanup, render, screen, waitFor, fireEvent } from '@testing-library/react';
 import Dashboard from './Dashboard';
+import App from '../../App';
 import "@testing-library/jest-dom/extend-expect";
 import { MemoryRouter } from 'react-router-dom';
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import "./Cart.scss";
 import logo from "../../assets/logo-bp.png";
 import { BiHomeCircle } from "react-icons/bi";
@@ -48,7 +48,7 @@ const Cart = ({
           );
         })
       ) : (
-        <div> Cart is empty. </div>
+        <Navigate to='/' replace={true}/>
       )}
       {cartItems.length ? (
         <div className="payables-container">
