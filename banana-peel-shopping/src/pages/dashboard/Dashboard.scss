@@ -53,11 +53,22 @@
   background-color: #ffb701;
 }
 
+.cart-item{
+  align-items: center;
+  width: -webkit-fill-available;
+    text-align: center;
+    border-radius: var(--radius);
+    display: inline-flex;
+    height: -webkit-fill-available !important;
+    background-color: #fff;
+    margin: 2em;
+}
+
 .product-item {
   text-align: center;
   border-radius: var(--radius);
   width: 15em;
-  height: -webkit-fill-available!important;
+  height: -webkit-fill-available !important;
   background-color: #fff;
   padding: 20px;
   margin: 10px;
@@ -107,7 +118,7 @@
 .buyItem {
   display: block;
   width: -webkit-fill-available;
-  padding: 5px 0px 10px 0px!important;
+  padding: 5px 0px 10px 0px !important;
   outline: solid !important;
   font-weight: 600 !important;
   color: var(--black-v2) !important;
@@ -129,15 +140,15 @@
 }
 
 .filter-btn:hover,
-#cart
-{
+#cart {
   color: var(--brand-color) !important ;
   transition: 0.2s;
 }
 
-.item-button:hover, .buyItem:hover {
-  background-color: var(--black-v2)!important;
-  color: var(--brand-color)!important;
+.item-button:hover,
+.buyItem:hover {
+  background-color: var(--black-v2) !important;
+  color: var(--brand-color) !important;
   transition: 0.2s;
 }
 
@@ -239,6 +250,16 @@
   transform: translate(-50%, -50%);
 }
 
+.cart-items-container{
+  border-radius: 10px;
+  background-color: var(--white-v2);
+  margin: 0vh 10vh 10vh 10vh;
+  text-transform: capitalize;
+  display: block;
+  padding: 3em;
+  align-items: center;
+}
+
 .products-section {
   border-radius: 10px;
   background-color: var(--white-v2);
@@ -250,14 +271,14 @@
   align-items: center;
 }
 
-.thumbnail-wrapper{
+.thumbnail-wrapper {
   padding: 10px;
 }
 
-.thumbnail-img{
+
+.thumbnail-img {
   width: 6em;
   height: 6em;
-
 }
 
 .slipper-img {

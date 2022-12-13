@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate } from "react-router-dom";
 import "./Cart.scss";
 import logo from "../../assets/logo-bp.png";
-import { HiOutlineHome} from "react-icons/hi";
+import { HiOutlineHome } from "react-icons/hi";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FaRegMinusSquare, FaRegPlusSquare } from "react-icons/fa";
 
@@ -13,7 +13,7 @@ const Cart = ({
   setCheckedItems,
   itemTotal,
   setItemTotal,
-  setFlopItems
+  setFlopItems,
 }) => {
   const itemTot = checkedItems.reduce(
     (total, obj) => obj.price * obj.qty + total,
@@ -23,6 +23,15 @@ const Cart = ({
 
   return (
     <div>
+
+      <div className="top-nav-bar">
+        <Link to='/#prod-container'>
+        <a href="#prod-container" id="text-nav-top">
+          SELECTED ITEMS ON SALE! CHECK IT OUT!
+        </a>
+        </Link>
+      </div>
+
       <section className="nav-bar sticky">
         <div className="nav-container">
           <img className="logo" src={logo} alt="logo"></img>
@@ -49,7 +58,7 @@ const Cart = ({
             );
           })
         ) : (
-          <Navigate to='/' replace={true}/>
+          <Navigate to="/" replace={true} />
         )}
       </div>
       {cartItems.length ? (
@@ -79,7 +88,7 @@ const CartItem = ({
   checkedItems,
   setCartItems,
   setCheckedItems,
-  setFlopItems
+  setFlopItems,
 }) => {
   const { title, price, qty, img, desc } = item;
   const [currImg, setCurrImg] = useState(0);
@@ -117,7 +126,7 @@ const CartItem = ({
     const filterChecked = checkedItems.filter((cItem) => cItem !== item);
     setCartItems(filterCart);
     setCheckedItems(filterChecked);
-    setFlopItems(prevState => {
+    setFlopItems((prevState) => {
       const newState = prevState.map((obj) => {
         if (obj.id === cartItems[index].id) {
           return { ...obj, qty: 0 };
@@ -130,7 +139,7 @@ const CartItem = ({
 
   const handleAddQty = () => {
     setCurrIndex(index);
-    setCartItems(prevState => {
+    setCartItems((prevState) => {
       const newState = prevState.map((obj) => {
         if (obj.id === cartItems[index].id) {
           return { ...obj, qty: obj.qty + 1 };
@@ -139,7 +148,7 @@ const CartItem = ({
       });
       return newState;
     });
-    setFlopItems(prevState => {
+    setFlopItems((prevState) => {
       const newState = prevState.map((obj) => {
         if (obj.id === cartItems[index].id) {
           return { ...obj, qty: obj.qty + 1 };
@@ -148,7 +157,7 @@ const CartItem = ({
       });
       return newState;
     });
-    setCheckedItems(prevState => {
+    setCheckedItems((prevState) => {
       const newState = prevState.map((obj) => {
         if (obj.id === cartItems[index].id) {
           return { ...obj, qty: obj.qty + 1 };
@@ -161,16 +170,7 @@ const CartItem = ({
 
   const handleDeductQty = () => {
     setCurrIndex(index);
-    setCartItems(prevState => {
-      const newState = prevState.map(obj => {
-        if (obj.id === cartItems[index].id) {
-          return { ...obj, qty: obj.qty - 1 };
-        }
-        return obj;
-      });
-      return newState;
-    });
-    setFlopItems(prevState => {
+    setCartItems((prevState) => {
       const newState = prevState.map((obj) => {
         if (obj.id === cartItems[index].id) {
           return { ...obj, qty: obj.qty - 1 };
@@ -179,7 +179,16 @@ const CartItem = ({
       });
       return newState;
     });
-    setCheckedItems(prevState => {
+    setFlopItems((prevState) => {
+      const newState = prevState.map((obj) => {
+        if (obj.id === cartItems[index].id) {
+          return { ...obj, qty: obj.qty - 1 };
+        }
+        return obj;
+      });
+      return newState;
+    });
+    setCheckedItems((prevState) => {
       const newState = prevState.map((obj) => {
         if (obj.id === cartItems[index].id) {
           return { ...obj, qty: obj.qty - 1 };
@@ -192,7 +201,7 @@ const CartItem = ({
 
   const handleSetQty = () => {
     setCurrIndex(index);
-    setCartItems(prevState => {
+    setCartItems((prevState) => {
       const newState = prevState.map((obj) => {
         if (obj.id === cartItems[index].id) {
           return { ...obj, qty: parseInt(count.current.value) };
@@ -201,7 +210,7 @@ const CartItem = ({
       });
       return newState;
     });
-    setFlopItems(prevState => {
+    setFlopItems((prevState) => {
       const newState = prevState.map((obj) => {
         if (obj.id === cartItems[index].id) {
           return { ...obj, qty: parseInt(count.current.value) };
@@ -210,7 +219,7 @@ const CartItem = ({
       });
       return newState;
     });
-    setCheckedItems(prevState => {
+    setCheckedItems((prevState) => {
       const newState = prevState.map((obj) => {
         if (obj.id === cartItems[index].id) {
           return { ...obj, qty: parseInt(count.current.value) };
@@ -242,7 +251,7 @@ const CartItem = ({
               onClick={() => {
                 setCurrImg(index);
               }}
-              className="item-img slipper-img"
+              className="thumbnail-img"
             />
           );
         })}
