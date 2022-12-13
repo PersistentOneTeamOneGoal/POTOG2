@@ -54,9 +54,10 @@
 }
 
 .product-item {
+  text-align: center;
   border-radius: var(--radius);
-  width: 12em;
-  height: auto;
+  width: 15em;
+  height: -webkit-fill-available!important;
   background-color: #fff;
   padding: 20px;
   margin: 10px;
@@ -72,7 +73,7 @@
 }
 
 .products-container {
-  background-color: var(--white-v2);
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -106,10 +107,11 @@
 .buyItem {
   display: block;
   width: -webkit-fill-available;
-  padding: 5px !important ;
-  outline: solid !important ;
-  font-weight: 600 !important ;
-  color: black !important ;
+  padding: 5px 0px 10px 0px!important;
+  outline: solid !important;
+  font-weight: 600 !important;
+  color: var(--black-v2) !important;
+  background-color: var(--brand-color) !important;
 }
 
 .buy-btn {
@@ -127,10 +129,15 @@
 }
 
 .filter-btn:hover,
-#cart,
-.item-button:hover,
-.buy-btn:hover {
+#cart
+{
   color: var(--brand-color) !important ;
+  transition: 0.2s;
+}
+
+.item-button:hover, .buyItem:hover {
+  background-color: var(--black-v2)!important;
+  color: var(--brand-color)!important;
   transition: 0.2s;
 }
 
@@ -174,9 +181,9 @@
   transition: 0.5s;
   margin: 0px 20px;
   background: none;
-  color: inherit;
+  color: var(--brand-color);
   border: none;
-  top: 25px;
+  top: 30px;
   padding: 0;
   position: absolute;
   right: 30px;
@@ -188,9 +195,10 @@
 .item-button {
   display: none;
   position: relative;
-  background: none;
+  background: var(--brand-color);
   color: inherit;
   border: none;
+  border-color: var(--brand-color);
   padding: 10px 0px;
   font: inherit;
   cursor: pointer;
@@ -232,15 +240,29 @@
 }
 
 .products-section {
-  margin: 10vh;
+  border-radius: 10px;
+  background-color: var(--white-v2);
+  margin: 0vh 10vh 10vh 10vh;
   text-transform: capitalize;
   display: grid;
-  padding: 12px;
+  padding: 3em;
   grid-template-columns: auto auto auto auto;
   align-items: center;
 }
 
+.thumbnail-wrapper{
+  padding: 10px;
+}
+
+.thumbnail-img{
+  width: 6em;
+  height: 6em;
+
+}
+
 .slipper-img {
+  padding: 2em 2em 2em 0em;
+  display: block;
   width: 25em !important ;
   height: 25em !important ;
 }
@@ -258,7 +280,7 @@
   padding: 3em;
   display: flex;
   left: 20%;
-  top: 10%;
+  top: 6%;
   opacity: 1;
 }
 
