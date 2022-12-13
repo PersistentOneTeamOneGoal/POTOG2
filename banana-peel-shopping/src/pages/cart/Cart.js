@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, Navigate } from 'react-router-dom';
 import "./Cart.scss";
 import logo from "../../assets/logo-bp.png";
-import { BiHomeCircle } from "react-icons/bi";
+import { HiOutlineHome} from "react-icons/hi";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FaRegMinusSquare, FaRegPlusSquare } from "react-icons/fa";
 
@@ -28,7 +28,7 @@ const Cart = ({
           <img className="logo" src={logo} alt="logo"></img>
           <Link to="/">
             <button className="cart cart-btn" data-testid="home-btn">
-              <BiHomeCircle />
+              <HiOutlineHome />
             </button>
           </Link>
         </div>

@@ -12,6 +12,7 @@ import {
   FaRegMinusSquare,
 } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
+import { HiOutlineShoppingCart } from "react-icons/hi";
 
 const allTypes = ["ALL", ...new Set(flops.map((flop) => flop.type))];
 
@@ -67,7 +68,7 @@ const Dashboard = ({flopItems, setFlopItems, cartItems, setCartItems}) => {
           <Types types={types} filterItems={filterItems} />
           <Link to='/Cart'>
             <button className="cart cart-btn" data-testid="cart-btn">
-              <FaShoppingCart />
+              <HiOutlineShoppingCart />
             </button>
           </Link>
         </div>
@@ -108,6 +109,7 @@ const Dashboard = ({flopItems, setFlopItems, cartItems, setCartItems}) => {
         id="prod-container"
         className="products-container"
       >
+        <h1>SHOP FEATURED CATEGORIES</h1>
         <Products
           flopItems={flopItems}
           setCurrID={setCurrID}
@@ -245,7 +247,7 @@ const ItemModal = ({
                 src={flopItems[currID].img[index]}
                 alt={flopItems[currID].title}
                 onClick={() => {setCurrImg(index)}}
-                className="item-img slipper-img"
+                className="thumbnail-img"
               />
             );
           })}
