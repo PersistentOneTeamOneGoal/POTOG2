@@ -2,7 +2,6 @@
 import React, { useRef, useState } from "react";
 import flops from "../../data";
 import "./Dashboard.scss";
-import Cart from "../cart/Cart";
 import { Link } from 'react-router-dom';
 import logo from "../../assets/logo-bp.png";
 import logoWhite from "../../assets/logo-bp-white3.png";
@@ -16,8 +15,7 @@ import { MdOutlineClose } from "react-icons/md";
 
 const allTypes = ["ALL", ...new Set(flops.map((flop) => flop.type))];
 
-const Dashboard = ({cartItems, setCartItems}) => {
-  const [flopItems, setFlopItems] = useState(flops);
+const Dashboard = ({flopItems, setFlopItems, cartItems, setCartItems}) => {
   const [currID, setCurrID] = useState(0);
   // eslint-disable-next-line no-unused-vars
   const [types, setTypes] = useState(allTypes);
@@ -27,6 +25,8 @@ const Dashboard = ({cartItems, setCartItems}) => {
   const [qty, setQty] = useState(0);  
   const count = useRef();
 
+
+  
   //For filtering items by type
   const filterItems = (type) => {
     if (type === "ALL") {
@@ -163,6 +163,7 @@ const Products = ({ flopItems, setCurrID, setShowItemDetail }) => {
       {flopItems.map((flopItem, key) => {
         return (
           <Item
+            key={key}
             item={flopItem}
             setCurrID={setCurrID}
             setShowItemDetail={setShowItemDetail}
@@ -174,7 +175,7 @@ const Products = ({ flopItems, setCurrID, setShowItemDetail }) => {
 };
 
 //For product items
-const Item = ({ item, setCurrID, setShowItemDetail }) => {
+const Item = ({ key, item, setCurrID, setShowItemDetail }) => {
 
   const { id, title, img, price } = item;
 

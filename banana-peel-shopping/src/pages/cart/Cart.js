@@ -13,6 +13,7 @@ const Cart = ({
   setCheckedItems,
   itemTotal,
   setItemTotal,
+  setFlopItems
 }) => {
   const itemTot = checkedItems.reduce(
     (total, obj) => obj.price * obj.qty + total,
@@ -42,6 +43,7 @@ const Cart = ({
               checkedItems={checkedItems}
               setCartItems={setCartItems}
               setCheckedItems={setCheckedItems}
+              setFlopItems={setFlopItems}
             />
           );
         })
@@ -75,8 +77,9 @@ const CartItem = ({
   checkedItems,
   setCartItems,
   setCheckedItems,
+  setFlopItems
 }) => {
-  const { id, title, price, qty, img, desc } = item;
+  const { title, price, qty, img, desc } = item;
   const [currImg, setCurrImg] = useState(0);
   const [currIndex, setCurrIndex] = useState(0);
   const count = useRef();
@@ -125,6 +128,24 @@ const CartItem = ({
       });
       return newState;
     });
+    setFlopItems(prevState => {
+      const newState = prevState.map((obj) => {
+        if (obj.id === cartItems[index].id) {
+          return { ...obj, qty: obj.qty + 1 };
+        }
+        return obj;
+      });
+      return newState;
+    });
+    setCheckedItems(prevState => {
+      const newState = prevState.map((obj) => {
+        if (obj.id === cartItems[index].id) {
+          return { ...obj, qty: obj.qty + 1 };
+        }
+        return obj;
+      });
+      return newState;
+    });
   };
 
   const handleDeductQty = () => {
@@ -138,13 +159,49 @@ const CartItem = ({
       });
       return newState;
     });
+    setFlopItems(prevState => {
+      const newState = prevState.map((obj) => {
+        if (obj.id === cartItems[index].id) {
+          return { ...obj, qty: obj.qty - 1 };
+        }
+        return obj;
+      });
+      return newState;
+    });
+    setCheckedItems(prevState => {
+      const newState = prevState.map((obj) => {
+        if (obj.id === cartItems[index].id) {
+          return { ...obj, qty: obj.qty - 1 };
+        }
+        return obj;
+      });
+      return newState;
+    });
   };
 
   const handleSetQty = () => {
     setCurrIndex(index);
     setCartItems(prevState => {
       const newState = prevState.map((obj) => {
-        if (obj.id === id) {
+        if (obj.id === cartItems[index].id) {
+          return { ...obj, qty: parseInt(count.current.value) };
+        }
+        return obj;
+      });
+      return newState;
+    });
+    setFlopItems(prevState => {
+      const newState = prevState.map((obj) => {
+        if (obj.id === cartItems[index].id) {
+          return { ...obj, qty: parseInt(count.current.value) };
+        }
+        return obj;
+      });
+      return newState;
+    });
+    setCheckedItems(prevState => {
+      const newState = prevState.map((obj) => {
+        if (obj.id === cartItems[index].id) {
           return { ...obj, qty: parseInt(count.current.value) };
         }
         return obj;
