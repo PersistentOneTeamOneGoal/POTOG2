@@ -33,23 +33,25 @@ const Cart = ({
           </Link>
         </div>
       </section>
-      {cartItems.length ? (
-        cartItems.map((item, index) => {
-          return (
-            <CartItem
-              item={item}
-              index={index}
-              cartItems={cartItems}
-              checkedItems={checkedItems}
-              setCartItems={setCartItems}
-              setCheckedItems={setCheckedItems}
-              setFlopItems={setFlopItems}
-            />
-          );
-        })
-      ) : (
-        <Navigate to='/' replace={true}/>
-      )}
+      <div className="cart-items-container">
+        {cartItems.length ? (
+          cartItems.map((item, index) => {
+            return (
+              <CartItem
+                item={item}
+                index={index}
+                cartItems={cartItems}
+                checkedItems={checkedItems}
+                setCartItems={setCartItems}
+                setCheckedItems={setCheckedItems}
+                setFlopItems={setFlopItems}
+              />
+            );
+          })
+        ) : (
+          <Navigate to='/' replace={true}/>
+        )}
+      </div>
       {cartItems.length ? (
         <div className="payables-container">
           <div className="total">
@@ -115,6 +117,15 @@ const CartItem = ({
     const filterChecked = checkedItems.filter((cItem) => cItem !== item);
     setCartItems(filterCart);
     setCheckedItems(filterChecked);
+    setFlopItems(prevState => {
+      const newState = prevState.map((obj) => {
+        if (obj.id === cartItems[index].id) {
+          return { ...obj, qty: 0 };
+        }
+        return obj;
+      });
+      return newState;
+    });
   };
 
   const handleAddQty = () => {
@@ -217,7 +228,7 @@ const CartItem = ({
   );
 
   return (
-    <div>
+    <div className="cart-item">
       <button onClick={addCheckedItem}>
         <AiOutlineCheckCircle />
       </button>
