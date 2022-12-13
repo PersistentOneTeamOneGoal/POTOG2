@@ -26,7 +26,7 @@ const Cart = ({
         <div className="nav-container">
           <img className="logo" src={logo} alt="logo"></img>
           <Link to="/">
-            <button className="cart cart-btn" data-testid="cart-btn">
+            <button className="cart cart-btn" data-testid="home-btn">
               <BiHomeCircle />
             </button>
           </Link>
