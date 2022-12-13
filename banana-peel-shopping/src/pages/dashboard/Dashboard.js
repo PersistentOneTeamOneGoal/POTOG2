@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/aria-role */
 import React, { useRef, useState } from "react";
 import flops from "../../data";
-import "./Dashboard.css";
+import "./Dashboard.scss";
 import Cart from "../cart/Cart";
 import { Link } from 'react-router-dom';
 import logo from "../../assets/logo-bp.png";
@@ -270,13 +270,14 @@ const ItemModal = ({
 
           <div className="buy-btn-container">
             <button
-              data-testid="buy-btn"
+              data-testid="minus-btn"
               className="decItem buy-btn"
               onClick={() => setQty(qty > 0 ? qty - 1 : 0)}
             >
               <FaRegMinusSquare />
             </button>
             <input
+              data-testid="itemQty"
               type="number"
               className="itemQty"
               value={qty}
@@ -286,7 +287,7 @@ const ItemModal = ({
                 setQty(parseInt(count.current.value));
               }}
             />
-            <button className="addItem buy-btn" onClick={() => setQty(qty + 1)}>
+            <button className="addItem buy-btn" data-testid="plus-btn" onClick={() => setQty(qty + 1)}>
               <FaRegPlusSquare />
             </button>
           </div>

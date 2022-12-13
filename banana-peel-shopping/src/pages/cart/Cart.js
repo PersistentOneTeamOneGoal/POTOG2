@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import "./Cart.css";
+import { Link } from 'react-router-dom';
+import "./Cart.scss";
 import logo from "../../assets/logo-bp.png";
 import { BiHomeCircle } from "react-icons/bi";
 import { AiOutlineCheckCircle } from "react-icons/ai";
