@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 import flops from "../../data";
 import "./Dashboard.scss";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo-bp.png";
 import logoWhite from "../../assets/logo-bp-white3.png";
 import banner from "../../assets/xmas-sale4.png";
@@ -16,18 +16,16 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 
 const allTypes = ["ALL", ...new Set(flops.map((flop) => flop.type))];
 
-const Dashboard = ({flopItems, setFlopItems, cartItems, setCartItems}) => {
+const Dashboard = ({ flopItems, setFlopItems, cartItems, setCartItems }) => {
   const [currID, setCurrID] = useState(0);
   // eslint-disable-next-line no-unused-vars
   const [types, setTypes] = useState(allTypes);
   //Local States
   const [showItemDetail, setShowItemDetail] = useState(false);
   // const [showCart, setShowCart] = useState(false);
-  const [qty, setQty] = useState(0);  
+  const [qty, setQty] = useState(0);
   const count = useRef();
 
-
-  
   //For filtering items by type
   const filterItems = (type) => {
     if (type === "ALL") {
@@ -59,14 +57,18 @@ const Dashboard = ({flopItems, setFlopItems, cartItems, setCartItems}) => {
     //Main container for the whole dashboard app
     <main>
       {/*Current Nav Banner*/}
-      <div className="top-nav-bar"><a href='#prod-container' id='text-nav-top'>SELECTED ITEMS ON SALE! CHECK IT OUT!</a></div>
+      <div className="top-nav-bar">
+        <a href="#prod-container" id="text-nav-top">
+          SELECTED ITEMS ON SALE! CHECK IT OUT!
+        </a>
+      </div>
 
       {/*Navigation Bar*/}
       <section className="nav-bar sticky">
         <div className="nav-container">
           <img className="logo" src={logo} alt="logo"></img>
           <Types types={types} filterItems={filterItems} />
-          <Link to='/Cart'>
+          <Link to="/Cart">
             <button className="cart cart-btn" data-testid="cart-btn">
               <HiOutlineShoppingCart />
             </button>
@@ -136,7 +138,6 @@ const Dashboard = ({flopItems, setFlopItems, cartItems, setCartItems}) => {
 
 //For type buttons
 const Types = ({ types, filterItems }) => {
-
   return (
     <div className="btn-container">
       {types.map((type, index) => {
@@ -159,7 +160,6 @@ const Types = ({ types, filterItems }) => {
 
 //For products container
 const Products = ({ flopItems, setCurrID, setShowItemDetail }) => {
-
   return (
     <div className="products-section">
       {flopItems.map((flopItem, key) => {
@@ -178,7 +178,6 @@ const Products = ({ flopItems, setCurrID, setShowItemDetail }) => {
 
 //For product items
 const Item = ({ key, item, setCurrID, setShowItemDetail }) => {
-
   const { id, title, img, price } = item;
 
   return (
@@ -246,7 +245,9 @@ const ItemModal = ({
               <img
                 src={flopItems[currID].img[index]}
                 alt={flopItems[currID].title}
-                onClick={() => {setCurrImg(index)}}
+                onClick={() => {
+                  setCurrImg(index);
+                }}
                 className="thumbnail-img"
               />
             );
@@ -290,7 +291,11 @@ const ItemModal = ({
                 setQty(parseInt(count.current.value));
               }}
             />
-            <button className="addItem buy-btn" data-testid="plus-btn" onClick={() => setQty(qty + 1)}>
+            <button
+              className="addItem buy-btn"
+              data-testid="plus-btn"
+              onClick={() => setQty(qty + 1)}
+            >
               <FaRegPlusSquare />
             </button>
           </div>
