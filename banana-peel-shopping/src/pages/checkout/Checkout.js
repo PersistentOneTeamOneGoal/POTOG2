@@ -31,6 +31,7 @@ const Checkout = ({ checkedItems, itemTotal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setConfirm(true);
+    
     await axios({
       method: "POST",
       url: `https://api.mailslurp.com/sendEmail?apiKey=${API_KEY}`,
@@ -40,11 +41,52 @@ const Checkout = ({ checkedItems, itemTotal }) => {
         subject: `BananaPeel - Order for ${user.name}`,
         body: `Good day, user ${user.name}! We have received your order entailing these following items: ${message}. With total price of: $${itemTotal}. To confirm order, click the confirmation link below https://bananapeel.com`,
       },
+    }).then((res) => {
+      const { data } = res;
+      console.log('post ', data);
     });
   };
 
   return (
     <div className="checkout-container">
+      {confirm && 
+        <div className="receipt-modal">
+          <div className="receipt-header">
+              Thank you for your purchase!
+          </div>
+          
+          <div className="receipt-details">
+            <div className="order-header">
+              <h6>Name: </h6><p className="order-name">{user.name}</p>
+              <h6>Email: </h6><p className="order-email">{user.email}</p>
+              <h6>Contact No.: </h6><p className="order-contact">{user.contact}</p>
+            </div>
+            <div className="order-body">
+              {
+                checkedItems.map((item)=>{
+                  return(
+                    <div className="order-body container">
+                      <p className="order-body title">{item.title}</p>
+                      <div className="order-body qty"> Qty: {item.qty}</div>
+                      <div className="order-body price"> Subtotal: {item.qty * item.price}</div>
+                    </div>
+                  );
+                })
+              }
+              <div className="order-footer">
+                <div className="order-footer item-tot">
+                  Total: ${itemTotal}
+                </div>
+                <div className="order-footer notif"> Receipt is also sent through email. </div>
+              </div>
+            </div>
+          </div>
+
+          <Link to='/' onClick={()=>{setConfirm(false)}} className="dashboard-btn">
+            OKAY
+          </Link>
+        </div>
+      }
       <div className="checkout-header">
         <img className="logo" src={logo} alt="logo"></img>
         <Link className="cart-btn" to="/Cart">
