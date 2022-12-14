@@ -4,7 +4,6 @@
 /* eslint-disable testing-library/await-async-query */
 import { cleanup, render, screen, waitFor, fireEvent } from '@testing-library/react';
 import Dashboard from './Dashboard';
-import App from '../../App';
 import "@testing-library/jest-dom/extend-expect";
 import { MemoryRouter } from 'react-router-dom';
 
@@ -12,7 +11,8 @@ describe("Checks the Dashboard UI",()=>{
     afterEach(cleanup);
 
     it("has a quick looks button",async ()=>{
-        render(<Dashboard />, {wrapper: MemoryRouter});
+        render(<App />, {wrapper: MemoryRouter})
+        // render(<Dashboard />, {wrapper: MemoryRouter});
 
         fireEvent.mouseOver(screen.getByTestId("products-item1"));
         // eslint-disable-next-line testing-library/await-async-utils 
@@ -20,25 +20,29 @@ describe("Checks the Dashboard UI",()=>{
     })// passed
 
     it("has a cart button",()=>{
-        render(<Dashboard />,{wrapper: MemoryRouter})
+        render(<App />, {wrapper: MemoryRouter})
+        // render(<Dashboard />,{wrapper: MemoryRouter})
         const cart=screen.getByTestId("cart-btn");
         expect(cart).toBeInTheDocument();
     }) // passed
 
     it("checks for the product",()=>{
-        render(<Dashboard />, {wrapper: MemoryRouter})
+        render(<App />, {wrapper: MemoryRouter})
+        // render(<Dashboard />, {wrapper: MemoryRouter})
         const container=screen.getByTestId("products-container");
         expect(container).toBeInTheDocument();
     }) //passed
 
     it("checks first product in the dashboard",()=>{
-        render(<Dashboard />, {wrapper: MemoryRouter})
+        render(<App />, {wrapper: MemoryRouter})
+        // render(<Dashboard />, {wrapper: MemoryRouter})
         const proItem=screen.getByTestId("products-item1");
         expect(proItem).toBeTruthy();
     })
 
     it("checks all products in the dashboard",()=>{
-        render(<Dashboard />, {wrapper: MemoryRouter})
+        render(<App />, {wrapper: MemoryRouter})
+        // render(<Dashboard />, {wrapper: MemoryRouter})
         const proItem=screen.getAllByRole("products-item");
         expect(proItem).toBeTruthy();
         expect((proItem).length).toBe(4);
@@ -46,7 +50,8 @@ describe("Checks the Dashboard UI",()=>{
      
 
     it("displays a modal with buttons", async ()=>{
-        render(<Dashboard/>, {wrapper: MemoryRouter})
+        render(<App />, {wrapper: MemoryRouter})
+        // render(<Dashboard/>, {wrapper: MemoryRouter})
         fireEvent.mouseOver(screen.getByTestId("products-item1"));
         waitFor(()=> expect(screen.getByTestId("look-btn1")).toBeInTheDocument());
         fireEvent.click(screen.getByTestId('look-btn1'));
@@ -61,7 +66,8 @@ describe("Checks the Dashboard UI",()=>{
     }); // passed
 
     it("displays item description in the modal", async ()=>{
-        render(<Dashboard />, {wrapper: MemoryRouter})
+        render(<App />, {wrapper: MemoryRouter})
+        // render(<Dashboard />, {wrapper: MemoryRouter})
 
         fireEvent.mouseOver(screen.getByTestId("products-item1"));
         waitFor(()=> expect(screen.getByTestId("look-btn1")).toBeInTheDocument());
@@ -71,7 +77,8 @@ describe("Checks the Dashboard UI",()=>{
     });
 
     it("has a button for adding and subtracting item quantity", async ()=>{
-        render(<Dashboard />, {wrapper: MemoryRouter})
+        render(<App />, {wrapper: MemoryRouter})
+        // render(<Dashboard />, {wrapper: MemoryRouter})
 
         fireEvent.mouseOver(screen.getByTestId("products-item1"));
         waitFor(()=> expect(screen.getByTestId("look-btn1")).toBeInTheDocument());
@@ -88,7 +95,8 @@ describe("Checks the Dashboard UI",()=>{
     }); // passed
 
     it("Displays the item quantity",async()=>{
-        render(<Dashboard />, {wrapper: MemoryRouter})
+        render(<App />, {wrapper: MemoryRouter})
+        // render(<Dashboard />, {wrapper: MemoryRouter})
 
         fireEvent.mouseOver(screen.getByTestId("products-item1"));
         waitFor(()=> expect(screen.getByTestId("look-btn1")).toBeInTheDocument());

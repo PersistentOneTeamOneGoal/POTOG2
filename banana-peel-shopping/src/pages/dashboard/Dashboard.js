@@ -7,7 +7,6 @@ import logo from "../../assets/logo-bp.png";
 import logoWhite from "../../assets/logo-bp-white3.png";
 import banner from "../../assets/xmas-sale4.png";
 import {
-  FaShoppingCart,
   FaRegPlusSquare,
   FaRegMinusSquare,
 } from "react-icons/fa";
@@ -265,7 +264,7 @@ const ItemModal = ({
           <div>
             <h4>Current item: {flopItems[currID].qty}</h4>
             <h4 className="price">
-              Total: $
+              Item Total: $
               {Number(
                 (flopItems[currID].price * flopItems[currID].qty).toFixed(2)
               )}
