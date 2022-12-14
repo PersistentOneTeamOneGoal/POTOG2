@@ -6,10 +6,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo-bp.png";
 import logoWhite from "../../assets/logo-bp-white3.png";
 import banner from "../../assets/xmas-sale4.png";
-import {
-  FaRegPlusSquare,
-  FaRegMinusSquare,
-} from "react-icons/fa";
+import { FaRegPlusSquare, FaRegMinusSquare } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 
@@ -50,14 +47,14 @@ const Dashboard = ({ flopItems, setFlopItems, cartItems, setCartItems }) => {
       : setCartItems([...cartItems]);
 
     setCartItems((prevState) => {
-        const newState = prevState.map((obj) => {
-          if (obj.id === flopItems[currID].id) {
-            return { ...obj, qty: flopItems[currID].qty };
-          }
-          return obj;
-        });
-        return newState;
+      const newState = prevState.map((obj) => {
+        if (obj.id === flopItems[currID].id) {
+          return { ...obj, qty: flopItems[currID].qty };
+        }
+        return obj;
       });
+      return newState;
+    });
   };
   console.log(cartItems);
   //console.log(flopItems);
@@ -78,7 +75,9 @@ const Dashboard = ({ flopItems, setFlopItems, cartItems, setCartItems }) => {
           <img className="logo" src={logo} alt="logo"></img>
           <Types types={types} filterItems={filterItems} />
           <Link to="/Cart">
-            <div className="cart-num">{cartItems.length !== 0 && cartItems.length}</div>
+            <div className={`cart-num-${cartItems.length}`}>
+              {cartItems.length !== 0 && cartItems.length}
+            </div>
             <button className="cart cart-btn" data-testid="cart-btn">
               <HiOutlineShoppingCart />
             </button>
@@ -133,13 +132,31 @@ const Dashboard = ({ flopItems, setFlopItems, cartItems, setCartItems }) => {
       <footer className="footer-container">
         <div className="footer-main">
           <img className="logo footer-logo" src={logoWhite} alt="logo"></img>
-          <p id="bp-slogan">Create your path!</p>
+          <p id="bp-slogan">Slip into your path!</p>
+
+          <div className="discount-container">
+            <h5 id="discount-text">
+              Sign Up & Save 20% Subscribe to our emails for exclusive products,
+              discounts and more!
+            </h5>
+            <form className="discount-form">
+              <input
+                className="d-email-input checkout-input"
+                type="email"
+                placeholder="Email Address"
+                // onChange={onChange}
+                name="email"
+              />
+              <button className="email-btn">Send me the discount!</button>
+            </form>
+          </div>
         </div>
-        <Types types={types} filterItems={filterItems} />
+
         <hr />
         <div className="footer-copyright">
           <p>
-            &copy; Copyright 2022 | ProfElec11076 | PERSISTENT_OneTeamOneGoal
+            &copy; 2022 ProfElec11076 | PERSISTENT_OneTeamOneGoal | All Rights
+            Reserved
           </p>
         </div>
       </footer>
@@ -150,13 +167,13 @@ const Dashboard = ({ flopItems, setFlopItems, cartItems, setCartItems }) => {
 //For type buttons
 const Types = ({ types, filterItems }) => {
   return (
-    <div className="btn-container">
+    <div className="btn-container ">
       {types.map((type, index) => {
         return (
           <a href="#prod-container" key={index}>
             <button
               type="button"
-              className="filter-btn"
+              className="filter-btn footer-menu-filter"
               key={index}
               onClick={() => filterItems(type)}
             >
@@ -271,6 +288,7 @@ const ItemModal = ({
             <h4 className="price">
               Subtotal: ${Number((flopItems[currID].price * qty).toFixed(2))}
             </h4>
+            n-container
           </header>
           <p className="item-text desc">{flopItems[currID].desc}</p>
           <div>
