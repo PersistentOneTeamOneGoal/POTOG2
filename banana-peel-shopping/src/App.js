@@ -21,7 +21,7 @@ function App() {
     <Routes>
       <Route path='/' element={<Dashboard flopItems={flopItems} setFlopItems={setFlopItems} cartItems={cartItems} setCartItems={setCartItems}/>} />
       <Route path='/Cart' element={<Cart cartItems={cartItems} setCartItems={setCartItems} checkedItems={checkedItems} setCheckedItems={setCheckedItems} itemTotal={itemTotal} setItemTotal={setItemTotal} setFlopItems={setFlopItems}/>} />
-      <Route path='/Checkout' element={<Checkout checkedItems={checkedItems} itemTotal={itemTotal}/>} />
+      <Route path='/Checkout' element={<Checkout checkedItems={checkedItems} itemTotal={itemTotal} setCartItems={setCartItems} setCheckedItems={setCheckedItems} setFlopItems={setFlopItems}/>} />
     </Routes>
   );
 }
