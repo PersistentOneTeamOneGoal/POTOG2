@@ -272,7 +272,7 @@ const CartItem = ({
         </div>
         <div className="buy-btn-container">
           <button
-            data-testid="buy-btn"
+            data-testid="clear-btn"
             className="decItem buy-btn"
             onClick={handleDeductQty}
           >
