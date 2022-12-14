@@ -3,7 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import "./Cart.scss";
 import logo from "../../assets/logo-bp.png";
 import { HiOutlineHome } from "react-icons/hi";
-import { AiOutlineCheckCircle } from "react-icons/ai";
+import { AiOutlineCheckCircle, AiFillCheckCircle , AiFillCloseCircle } from "react-icons/ai";
 import { FaRegMinusSquare, FaRegPlusSquare } from "react-icons/fa";
 
 const Cart = ({
@@ -237,26 +237,36 @@ const CartItem = ({
   //   [checkedItems]
   // );
 
+  const [isActive, setIsActive] = useState(false);
+  //const [iShown, setIsShown] = useState(false);
+
   return (
     
     <div className="cart-item">
-      <button onClick={addCheckedItem}>
-        <AiOutlineCheckCircle />
-      </button>
-      
+       <button className="btnCheck buy-btn" onClick={addCheckedItem}>
+        <div className="cursor-pointer select-none">
+          {isActive? <AiFillCheckCircle color="green" onClick={()=>{
+            setIsActive(!isActive)}} />:
+            <AiOutlineCheckCircle color="green" onClick={()=>{
+            setIsActive(!isActive)}} />
+          }
+        </div>
+        </button>
+        <button className="btnRemove buy-btn" onClick={removeCartItem}>
+        <AiFillCloseCircle color="red"/></button>
       <div className="item-img-container">
         <img src={img[currImg]} alt={title} className="slipper-img-cart" />
         {item.img.map((flopImg, index) => {
-          // return (
-          //   <img
-          //     src={img[index]}
-          //     alt={title}
-          //     onClick={() => {
-          //       setCurrImg(index);
-          //     }}
-          //     className="thumbnail-img"
-          //   />
-          // );
+          return (
+            <img
+              src={img[index]}
+              alt={title}
+              onClick={() => {
+                setCurrImg(index);
+              }}
+              className="thumbnail-img"
+            />
+          );
         })}
       </div>
       <div>
