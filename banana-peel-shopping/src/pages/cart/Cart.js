@@ -243,7 +243,7 @@ const CartItem = ({
   return (
     
     <div className="cart-item">
-       <button className="btnCheck buy-btn" onClick={addCheckedItem}>
+       <button data-testid="clear-btn" className="btnCheck buy-btn" onClick={addCheckedItem}>
         <div className="cursor-pointer select-none">
           {isActive? <AiFillCheckCircle className="check-icon" color="green" size={60} onClick={()=>{
             setIsActive(!isActive)}} />:
@@ -252,7 +252,7 @@ const CartItem = ({
           }
         </div>
         </button>
-        <button className="btnRemove buy-btn" onClick={removeCartItem}>
+        <button data-testid="add-btn"className="btnRemove buy-btn" onClick={removeCartItem}>
         <AiFillCloseCircle color="red" size={60}/></button>
       <div className="item-img-container">
         <img src={img[currImg]} alt={title} className="slipper-img-cart" />
@@ -285,7 +285,7 @@ const CartItem = ({
         </div>
         <div className="buy-btn-container">
           <button
-            data-testid="clear-btn"
+            data-testid="minus"
             className="decItem buy-btn"
             onClick={handleDeductQty}
           >
@@ -293,13 +293,14 @@ const CartItem = ({
             <FaRegMinusSquare />
           </button>
           <input
+          data-testid="qty"
             type="number"
             className="itemQty"
             value={qty}
             ref={count}
             onChange={handleSetQty}
           />
-          <button className="addItem buy-btn" onClick={handleAddQty}>
+          <button data-testid="plus"className="addItem buy-btn" onClick={handleAddQty}>
             <FaRegPlusSquare />
           </button>
         </div>

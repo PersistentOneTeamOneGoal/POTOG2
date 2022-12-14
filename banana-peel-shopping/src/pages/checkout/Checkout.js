@@ -142,6 +142,7 @@ const Checkout = ({
           name="name"
         />
         <input
+        data-testid="number"
           className="contact-input"
           type="number"
           placeholder="Contact No."

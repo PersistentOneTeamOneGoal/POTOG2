@@ -17,7 +17,7 @@ describe('This is checks the cart UI',()=>{
         const home= waitFor(()=> screen.getByTestId("home-btn"));
         expect(home).toBeTruthy();
     });
-    it("checks for atleast one product in the cart", async()=>{
+    it("checks for a product in the cart", async()=>{
         render(<App />, {wrapper: MemoryRouter});
 
         const item = waitFor(()=> screen.getByTestId("item"));
@@ -43,4 +43,30 @@ describe('This is checks the cart UI',()=>{
         expect(add).toBeTruthy();
     })
 
+    it("has a button for adding and subtracting item quantity", async ()=>{
+        render(<App />, {wrapper: MemoryRouter})
+        // render(<Dashboard />, {wrapper: MemoryRouter})
+        waitFor(() => {
+            const minus = screen.getByTestId("minus");
+            expect(minus).toBeInTheDocument();
+            const plus = screen.getByTestId("plus");
+            expect(plus).toBeInTheDocument();
+        });
+    });
+
+    it("checks the functionalities",async()=>{
+        render(<App />, {wrapper: MemoryRouter})
+
+        waitFor(()=>{
+            const qty = screen.getByTestId("qty");
+            const add = screen.getByTestId("plus");
+            expect(add).toBeInTheDocument();
+            fireEvent.click(add);
+            expect(qty).toHaveTextContent("2");
+            const minus = screen.getByTestId("minus");
+            expect(minus).toBeInTheDocument();
+            fireEvent.click(minus);
+            expect(qty).toHaveTextContent("1");
+        })
+    })
 })
