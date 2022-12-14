@@ -131,7 +131,7 @@ const Checkout = ({
         </Link>
         </div>
       </section>
-
+      <div className="title-page"><h1 id='text-cart'>CHECKOUT<hr/></h1></div>
       <form className="checkout-inputs" onSubmit={handleSubmit}>
         <input
           className="name-input"

@@ -61,7 +61,6 @@ const Cart = ({
         ) : (
           <Navigate to="/" replace={true} />
         )}
-      </div>
       {cartItems.length ? (
         <div className="payables-container">
           <div className="total">
@@ -70,7 +69,7 @@ const Cart = ({
           {!itemTotal ? (
             <p className="checkout-text">Checkout</p>
           ) : (
-            <Link className="checkout-btn" to="/Checkout">
+            <Link className="checkout-btn" to="/Checkout" style={{textDecoration: 'none'}}>
               Checkout
             </Link>
           )}
@@ -78,6 +77,7 @@ const Cart = ({
       ) : (
         <></>
       )}
+      </div>
     </div>
   );
 };
@@ -256,18 +256,6 @@ const CartItem = ({
         <AiFillCloseCircle color="red" size={60}/></button>
       <div className="item-img-container">
         <img src={img[currImg]} alt={title} className="slipper-img-cart" />
-        {/* {item.img.map((flopImg, index) => {
-          return (
-            <img
-              src={img[index]}
-              alt={title}
-              onClick={() => {
-                setCurrImg(index);
-              }}
-              className="thumbnail-img"
-            />
-          );
-        })} */}
       </div>
       <div>
         <div className="item-info">
