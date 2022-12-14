@@ -64,7 +64,7 @@ const Cart = ({
       {cartItems.length ? (
         <div className="payables-container">
           <div className="total">
-            Item Total: ${Number(itemTotal).toFixed(2)}
+            Total: ${Number(itemTotal).toFixed(2)}
           </div>
           {!itemTotal ? (
             <p className="checkout-text">Checkout</p>
@@ -230,11 +230,11 @@ const CartItem = ({
     });
   };
 
-  useEffect(() => console.log("The cart after update", cartItems), [cartItems]);
-  useEffect(
-    () => console.log("The checked after update", checkedItems),
-    [checkedItems]
-  );
+  // useEffect(() => console.log("The cart after update", cartItems), [cartItems]);
+  // useEffect(
+  //   () => console.log("The checked after update", checkedItems),
+  //   [checkedItems]
+  // );
 
   return (
     <div className="cart-item">
@@ -266,7 +266,7 @@ const CartItem = ({
           <div>
             <h4>Current item: {cartItems[index].qty}</h4>
             <h4 className="price">
-              Total: ${Number((price * qty).toFixed(2))}
+              Item Total: ${Number((price * qty).toFixed(2))}
             </h4>
           </div>
         </div>

@@ -1,36 +1,117 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import axios from "axios";
 import { FaShoppingCart } from "react-icons/fa";
+import logo from "../../assets/logo-bp.png";
 
-const Checkout = ({ checkedItems }) => {
+const Checkout = ({ checkedItems, itemTotal }) => {
+  const [confirm, setConfirm] = useState(false);
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    contact: "",
+  });
+  const API_KEY =
+    "6e6afec250b799fa2e541a5cb299e1078d27cea973761e0fa06e629545bc572c";
+  const axios = require("axios");
+  const message = checkedItems
+    .map((item) => ` ${item.title} Qty: ${item.qty}`)
+    .join(", ");
+
+  const onChange = (evt) => {
+    const value = evt.target.value;
+    const name = evt.target.name;
+
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
+  console.log("log", confirm);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setConfirm(true);
+    await axios({
+      method: "POST",
+      url: `https://api.mailslurp.com/sendEmail?apiKey=${API_KEY}`,
+      data: {
+        senderId: "afe12fa4-dfe2-4ee4-a1c3-5a4120970430",
+        to: "afe12fa4-dfe2-4ee4-a1c3-5a4120970430@mailslurp.com",
+        subject: `BananaPeel - Order for ${user.name}`,
+        body: `Good day, user ${user.name}! We have received your order entailing these following items: ${message}. With total price of: $${itemTotal}. To confirm order, click the confirmation link below https://bananapeel.com`,
+      },
+    });
+  };
+
   return (
-    <div>
-      <Link className="cart-btn" to="/Cart">
-        <FaShoppingCart/>
-      </Link>
-      
-      {
-        checkedItems.map((item, index) => {
-            return (
-                <CheckOutItem item={item} index={index}/>
-            )
-          }
-        )
-      }
-      {console.log(checkedItems)}
+    <div className="checkout-container">
+      <div className="checkout-header">
+        <img className="logo" src={logo} alt="logo"></img>
+        <Link className="cart-btn" to="/Cart">
+          <FaShoppingCart />
+        </Link>
+      </div>
+      <form className="checkout-inputs" onSubmit={handleSubmit}>
+        <input
+          className="name-input"
+          type="text"
+          placeholder="Name"
+          onChange={onChange}
+          name="name"
+        />
+        <input
+          className="email-input"
+          type="email"
+          placeholder="Email"
+          onChange={onChange}
+          name="email"
+        />
+        <input
+          className="contact-input"
+          type="number"
+          placeholder="Contact No."
+          onChange={onChange}
+          name="contact"
+        />
+        <div className="checked-items">
+          {checkedItems.map((item, index) => {
+            return <CheckOutItem item={item} index={index} />;
+          })}
+          <div className="items-total">
+            <p> Total Amount: ${Number(itemTotal.toFixed(2))} </p>
+          </div>
+        </div>
+        <button className="order-btn">Place Order</button>
+      </form>
     </div>
   );
 };
 
 const CheckOutItem = ({ item, index }) => {
-    const {title, price, qty, img, desc} = item;
-    return (
-        <div>
-            
-        </div>
-    );
-}
+  const { title, price, qty, img, desc } = item;
 
+  return (
+    <div className="cart-item">
+      <div className="item-img-container">
+        <img src={img[0]} alt={title} className="item-img slipper-img" />
+      </div>
+      <div>
+        <div className="item-info">
+          <header>
+            <h4>{title}</h4>
+            <h4 className="price">Unit Price: ${price}</h4>
+          </header>
+          <p className="item-text desc">{desc}</p>
+          <div>
+            <h4>Current item: {qty}</h4>
+            <h4 className="price">
+              Item Total: ${Number((price * qty).toFixed(2))}
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Checkout;
