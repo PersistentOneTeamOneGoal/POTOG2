@@ -39,8 +39,8 @@ it("Check if there is an input field for email", () => {
 
 describe("This is to test axios",()=>{
                 const data = {
-                        senderId: "afe12fa4-dfe2-4ee4-a1c3-5a4120970430",
-                        to: "afe12fa4-dfe2-4ee4-a1c3-5a4120970430@mailslurp.com",
+                        senderId: "11eafd1d-4c35-4e6a-ab1d-d371ac475534",
+                        to: "11eafd1d-4c35-4e6a-ab1d-d371ac475534@mailslurp.com",
                         subject: `BananaPeel - Order for Sample User`,
                         body: `Good day, user Sample User! We have received your order entailing these following items: Sample Item. With total price of: $200. To confirm order, click the confirmation link below https://bananapeel.com`,
                       };

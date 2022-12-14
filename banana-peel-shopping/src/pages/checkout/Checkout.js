@@ -19,7 +19,7 @@ const Checkout = ({
     email: "",
   });
   const API_KEY =
-    "6e6afec250b799fa2e541a5cb299e1078d27cea973761e0fa06e629545bc572c";
+    "ad904c1fb1a8cb891cba6e8e05a98a98ce41bf19e27aa9922610884abad56aa1";
   const axios = require("axios");
   const message = checkedItems
     .map((item) => ` ${item.title} Qty: ${item.qty}`)
@@ -44,8 +44,8 @@ const Checkout = ({
       method: "POST",
       url: `https://api.mailslurp.com/sendEmail?apiKey=${API_KEY}`,
       data: {
-        senderId: "afe12fa4-dfe2-4ee4-a1c3-5a4120970430",
-        to: "afe12fa4-dfe2-4ee4-a1c3-5a4120970430@mailslurp.com",
+        senderId: "11eafd1d-4c35-4e6a-ab1d-d371ac475534",
+        to: "11eafd1d-4c35-4e6a-ab1d-d371ac475534@mailslurp.com",
         subject: `BananaPeel - Order for ${user.name}`,
         body: `Good day, user ${user.name}! We have received your order entailing these following items: ${message}. With total price of: $${itemTotal}. To confirm order, click the confirmation link below https://bananapeel.com`,
       },
@@ -56,66 +56,86 @@ const Checkout = ({
   };
 
   return (
-    
     <div className="checkout-container">
       {confirm && (
-        <div className="receipt-modal">
-          <div className="receipt-header">Thank you for your purchase!</div>
+        <div className="receipt-overlay">
+          <div className="receipt-modal">
+            <h2 className="receipt-header">Thank you for your purchase!</h2>
 
-          <div className="receipt-details">
-            <div className="order-header">
-              <h6>Name: </h6>
+            <div className="receipt-details">
+              <div className="order-header">
+                <table id="checkout-table">
+                  <tr>
+                    <td className="t-1">Name: </td>
+                    <td>{user.name}</td>
+                  </tr>
+                  <tr>
+                    <td className="t-1">Email: </td>
+                    <td>{user.email}</td>
+                  </tr>
+                  <tr>
+                    <td className="t-1">Contact No.: </td>
+                    <td>{user.contact}</td>
+                  </tr>
+                </table>
+
+                {/* <h6>Name: </h6>
               <p className="order-name">{user.name}</p>
               <h6>Email: </h6>
               <p className="order-email">{user.email}</p>
               <h6>Contact No.: </h6>
-              <p className="order-contact">{user.contact}</p>
-            </div>
-            <div className="order-body">
-              {checkedItems.map((item) => {
-                return (
-                  <div className="order-body container">
-                    <p className="order-body title">{item.title}</p>
-                    <div className="order-body qty"> Qty: {item.qty}</div>
-                    <div className="order-body price">
-                      {" "}
-                      Subtotal: {item.qty * item.price}
+              <p className="order-contact">{user.contact}</p> */}
+              </div>
+              <div className="order-body">
+                {checkedItems.map((item) => {
+                  return (
+
+                    
+                    <div className="order-body container">
+                      <p className="order-body order-title">{item.title}</p>
+                      <div className="order-body qty"> Qty: {item.qty}</div>
+                      <div className="order-body price">
+                        {" "}
+                        Subtotal: {item.qty * item.price}
+                      </div>
                     </div>
+                  );
+                })}
+                <div className="order-footer">
+                  <div className="order-footer item-tot">
+                    Total: ${itemTotal}
                   </div>
-                );
-              })}
-              <div className="order-footer">
-                <div className="order-footer item-tot">Total: ${itemTotal}</div>
-                <div className="order-footer notif">
-                  {" "}
-                  Receipt is also sent through email.{" "}
+                  <div className="order-footer notif">
+                    {" "}
+                    Receipt is also sent through email.{" "}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <Link
-            to="/"
-            onClick={() => {
-              setConfirm(false);
-              setCheckedItems([]);
-              setCartItems([]);
-              setFlopItems((prevState) => {
-                const newState = prevState.map((obj) => {
-                  obj.qty = 0;
-                  return obj;
+            <Link
+              to="/"
+              onClick={() => {
+                setConfirm(false);
+                setCheckedItems([]);
+                setCartItems([]);
+                setFlopItems((prevState) => {
+                  const newState = prevState.map((obj) => {
+                    obj.qty = 0;
+                    return obj;
+                  });
+                  return newState;
                 });
-                return newState;
-              });
-            }}
-            className="dashboard-btn"
-          >
-            OKAY
-          </Link>
+              }}
+              className="dashboard-btn"
+            >
+              OKAY
+            </Link>
+          </div>
         </div>
       )}
-            {/*Current Nav Banner*/}
-            <div className="top-nav-bar">
+      {/*Current Nav Banner*/}
+      <div className="top-nav-bar">
         <a href="#prod-container" id="text-nav-top">
           SELECTED ITEMS ON SALE! CHECK IT OUT!
         </a>
@@ -127,45 +147,52 @@ const Checkout = ({
           <img className="logo" src={logo} alt="logo"></img>
           {/* <Types types={types} filterItems={filterItems} /> */}
           <Link className="cart-btn" to="/Cart">
-          <HiOutlineShoppingCart />
-        </Link>
+            <HiOutlineShoppingCart />
+          </Link>
         </div>
       </section>
-      <div className="title-page"><h1 id='text-cart'>CHECKOUT<hr/></h1></div>
-      <form className="checkout-inputs" onSubmit={handleSubmit}>
-        <input
-          className="name-input"
-          type="text"
-          placeholder="Name"
-          onChange={onChange}
-          name="name"
-        />
-        <input
-          className="contact-input"
-          type="number"
-          placeholder="Contact No."
-          onChange={onChange}
-          name="contact"
-        />        <input
-        className="email-input"
-        type="email"
-        placeholder="Email"
-        onChange={onChange}
-        name="email"
-      />
-        <div className="checked-items">
-          {checkedItems.map((item, index) => {
-            return <CheckOutItem item={item} index={index} />;
-          })}
-          <div className="items-total">
-            <p> Total Amount: ${Number(itemTotal.toFixed(2))} </p>
-          </div>
-        </div>
-        <button data-testid="order-btn" className="order-btn">Place Order</button>
-      </form>
-        </div>
+
+      <div className="title-page">
+        <h1 id="text-cart">
+          CHECKOUT
+          <hr />
+        </h1>
       </div>
-      
+      <div className="checkout-wrapper">
+        <form className="checkout-inputs" onSubmit={handleSubmit}>
+          <input
+            className="name-input checkout-input"
+            type="text"
+            placeholder="Name"
+            onChange={onChange}
+            name="name"
+          />
+          <input
+            className="contact-input checkout-input"
+            type="number"
+            placeholder="Contact No."
+            onChange={onChange}
+            name="contact"
+          />{" "}
+          <input
+            className="email-input checkout-input"
+            type="email"
+            placeholder="Email"
+            onChange={onChange}
+            name="email"
+          />
+          <div className="checked-items">
+            {checkedItems.map((item, index) => {
+              return <CheckOutItem item={item} index={index} />;
+            })}
+            <div className="items-total">
+              <p> Total Amount: ${Number(itemTotal.toFixed(2))} </p>
+            </div>
+          </div>
+          <button className="order-btn">Place Order</button>
+        </form>
+      </div>
+
       <footer className="footer-container">
         <div className="footer-main">
           <img className="logo footer-logo" src={logoWhite} alt="logo"></img>
@@ -186,7 +213,7 @@ const CheckOutItem = ({ item, index }) => {
   const { title, price, qty, img, desc } = item;
 
   return (
-    <div className="checkout-item">
+    <div className="cart-item">
       <div className="item-img-containers">
         <img src={img[0]} className="checkout-slipper" alt={title}></img>
       </div>
