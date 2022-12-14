@@ -42,6 +42,7 @@ const Cart = ({
           </Link>
         </div>
       </section>
+      <div className="title-page"><h1 id='text-cart'>SHOPPING CART<hr/></h1></div>
       <div className="cart-items-container">
         {cartItems.length ? (
           cartItems.map((item, index) => {
@@ -237,23 +238,25 @@ const CartItem = ({
   // );
 
   return (
+    
     <div className="cart-item">
       <button onClick={addCheckedItem}>
         <AiOutlineCheckCircle />
       </button>
+      
       <div className="item-img-container">
-        <img src={img[currImg]} alt={title} className="item-img slipper-img" />
+        <img src={img[currImg]} alt={title} className="slipper-img-cart" />
         {item.img.map((flopImg, index) => {
-          return (
-            <img
-              src={img[index]}
-              alt={title}
-              onClick={() => {
-                setCurrImg(index);
-              }}
-              className="thumbnail-img"
-            />
-          );
+          // return (
+          //   <img
+          //     src={img[index]}
+          //     alt={title}
+          //     onClick={() => {
+          //       setCurrImg(index);
+          //     }}
+          //     className="thumbnail-img"
+          //   />
+          // );
         })}
       </div>
       <div>

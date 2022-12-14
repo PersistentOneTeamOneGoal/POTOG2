@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
+import { HiOutlineShoppingCart } from "react-icons/hi";
 import logo from "../../assets/logo-bp.png";
+import logoWhite from "../../assets/logo-bp-white3.png";
 
 const Checkout = ({
   checkedItems,
@@ -13,8 +14,8 @@ const Checkout = ({
   const [confirm, setConfirm] = useState(false);
   const [user, setUser] = useState({
     name: "",
-    email: "",
     contact: "",
+    email: "",
   });
   const API_KEY =
     "6e6afec250b799fa2e541a5cb299e1078d27cea973761e0fa06e629545bc572c";
@@ -54,7 +55,9 @@ const Checkout = ({
   };
 
   return (
+    
     <div className="checkout-container">
+<<<<<<< Updated upstream
       {confirm && (
         <div className="receipt-modal">
           <div className="receipt-header">Thank you for your purchase!</div>
@@ -112,11 +115,33 @@ const Checkout = ({
         </div>
       )}
       <div className="checkout-header">
+=======
+      {/* <div className="checkout-header">
+>>>>>>> Stashed changes
         <img className="logo" src={logo} alt="logo"></img>
         <Link className="cart-btn" to="/Cart">
           <FaShoppingCart />
         </Link>
+      </div> */}
+
+            {/*Current Nav Banner*/}
+            <div className="top-nav-bar">
+        <a href="#prod-container" id="text-nav-top">
+          SELECTED ITEMS ON SALE! CHECK IT OUT!
+        </a>
       </div>
+
+      {/*Navigation Bar*/}
+      <section className="nav-bar sticky">
+        <div className="nav-container">
+          <img className="logo" src={logo} alt="logo"></img>
+          {/* <Types types={types} filterItems={filterItems} /> */}
+          <Link className="cart-btn" to="/Cart">
+          <HiOutlineShoppingCart />
+        </Link>
+        </div>
+      </section>
+
       <form className="checkout-inputs" onSubmit={handleSubmit}>
         <input
           className="name-input"
@@ -125,20 +150,20 @@ const Checkout = ({
           onChange={onChange}
           name="name"
         />
-        <input
-          className="email-input"
-          type="email"
-          placeholder="Email"
-          onChange={onChange}
-          name="email"
-        />
+
         <input
           className="contact-input"
           type="number"
           placeholder="Contact No."
           onChange={onChange}
           name="contact"
-        />
+        />        <input
+        className="email-input"
+        type="email"
+        placeholder="Email"
+        onChange={onChange}
+        name="email"
+      />
         <div className="checked-items">
           {checkedItems.map((item, index) => {
             return <CheckOutItem item={item} index={index} />;
@@ -149,6 +174,19 @@ const Checkout = ({
         </div>
         <button className="order-btn">Place Order</button>
       </form>
+      
+      <footer className="footer-container">
+        <div className="footer-main">
+          <img className="logo footer-logo" src={logoWhite} alt="logo"></img>
+          <p id="bp-slogan">Create your path!</p>
+        </div>
+        <hr />
+        <div className="footer-copyright">
+          <p>
+            &copy; Copyright 2022 | ProfElec11076 | PERSISTENT_OneTeamOneGoal
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
@@ -159,7 +197,7 @@ const CheckOutItem = ({ item, index }) => {
   return (
     <div className="cart-item">
       <div className="item-img-container">
-        <img src={img[0]} alt={title} className="item-img slipper-img" />
+        <img src={img[0]} alt={title} className="checkout-slipper" />
       </div>
       <div>
         <div className="item-info">

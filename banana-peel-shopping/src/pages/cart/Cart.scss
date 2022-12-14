@@ -1,0 +1,46 @@
+:root {
+    --radius: 10px;
+    --buy-btn: #00e600;
+    --brand-color: #ffb701;
+    --white-v2: hsl(280, 18%, 97%);
+    --black-v2: #1f1f1f;
+    --grey-v2: #969696;
+  }
+
+  .cart-items-container{
+    border-radius: 10px;
+    background-color: var(--white-v2);
+    margin: 10vh;
+    text-transform: capitalize;
+    display: block;
+    padding: 3em;
+    align-items: center;
+  }
+
+  .slipper-img-cart{
+    padding: 2em;
+    display: block;
+    width: 15em;
+    height: 15em;
+  }
+
+  .item-info {
+    padding-top: 30px;
+}
+  .title-page{
+    
+  }
+#text-cart{
+  margin: 80px;
+}
+
+.cart-item{
+  align-items: center;
+  width: -webkit-fill-available;
+    text-align:left;
+    border-radius: var(--radius);
+    display: inline-flex;
+    height: -webkit-fill-available !important;
+    background-color: #fff;
+    margin: 2em;
+}
