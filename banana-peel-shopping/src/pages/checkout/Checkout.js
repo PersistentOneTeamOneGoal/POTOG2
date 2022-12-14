@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import logo from "../../assets/logo-bp.png";
 
-const Checkout = ({ checkedItems, itemTotal }) => {
+const Checkout = ({
+  checkedItems,
+  itemTotal,
+  setCartItems,
+  setCheckedItems,
+  setFlopItems,
+}) => {
   const [confirm, setConfirm] = useState(false);
   const [user, setUser] = useState({
     name: "",
@@ -31,7 +37,7 @@ const Checkout = ({ checkedItems, itemTotal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setConfirm(true);
-    
+
     await axios({
       method: "POST",
       url: `https://api.mailslurp.com/sendEmail?apiKey=${API_KEY}`,
@@ -43,50 +49,68 @@ const Checkout = ({ checkedItems, itemTotal }) => {
       },
     }).then((res) => {
       const { data } = res;
-      console.log('post ', data);
+      console.log("post ", data);
     });
   };
 
   return (
     <div className="checkout-container">
-      {confirm && 
+      {confirm && (
         <div className="receipt-modal">
-          <div className="receipt-header">
-              Thank you for your purchase!
-          </div>
-          
+          <div className="receipt-header">Thank you for your purchase!</div>
+
           <div className="receipt-details">
             <div className="order-header">
-              <h6>Name: </h6><p className="order-name">{user.name}</p>
-              <h6>Email: </h6><p className="order-email">{user.email}</p>
-              <h6>Contact No.: </h6><p className="order-contact">{user.contact}</p>
+              <h6>Name: </h6>
+              <p className="order-name">{user.name}</p>
+              <h6>Email: </h6>
+              <p className="order-email">{user.email}</p>
+              <h6>Contact No.: </h6>
+              <p className="order-contact">{user.contact}</p>
             </div>
             <div className="order-body">
-              {
-                checkedItems.map((item)=>{
-                  return(
-                    <div className="order-body container">
-                      <p className="order-body title">{item.title}</p>
-                      <div className="order-body qty"> Qty: {item.qty}</div>
-                      <div className="order-body price"> Subtotal: {item.qty * item.price}</div>
+              {checkedItems.map((item) => {
+                return (
+                  <div className="order-body container">
+                    <p className="order-body title">{item.title}</p>
+                    <div className="order-body qty"> Qty: {item.qty}</div>
+                    <div className="order-body price">
+                      {" "}
+                      Subtotal: {item.qty * item.price}
                     </div>
-                  );
-                })
-              }
+                  </div>
+                );
+              })}
               <div className="order-footer">
-                <div className="order-footer item-tot">
-                  Total: ${itemTotal}
+                <div className="order-footer item-tot">Total: ${itemTotal}</div>
+                <div className="order-footer notif">
+                  {" "}
+                  Receipt is also sent through email.{" "}
                 </div>
-                <div className="order-footer notif"> Receipt is also sent through email. </div>
               </div>
             </div>
           </div>
 
-          <Link to='/' onClick={()=>{setConfirm(false)}} className="dashboard-btn">
+          <Link
+            to="/"
+            onClick={() => {
+              setConfirm(false);
+              setCheckedItems([]);
+              setCartItems([]);
+              setFlopItems((prevState) => {
+                const newState = prevState.map((obj) => {
+                  obj.qty = 0;
+                  return obj;
+                });
+                return newState;
+              });
+            }}
+            className="dashboard-btn"
+          >
             OKAY
           </Link>
         </div>
-      }
+      )}
       <div className="checkout-header">
         <img className="logo" src={logo} alt="logo"></img>
         <Link className="cart-btn" to="/Cart">
