@@ -142,19 +142,14 @@ const Checkout = ({
           name="name"
         />
         <input
-          className="email-input"
-          type="email"
-          placeholder="Email"
-          onChange={onChange}
-          name="email"
-        />
-        <input
           className="contact-input"
           type="number"
           placeholder="Contact No."
           onChange={onChange}
           name="contact"
-        />        <input
+        />        
+        <input
+        data-testid="email"
         className="email-input"
         type="email"
         placeholder="Email"
