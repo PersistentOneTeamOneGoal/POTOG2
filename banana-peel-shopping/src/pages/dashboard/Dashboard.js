@@ -48,6 +48,16 @@ const Dashboard = ({ flopItems, setFlopItems, cartItems, setCartItems }) => {
     flopItems[currID].qty !== 0 && !flopItems[currID].status
       ? setCartItems([...cartItems, flopItems[currID]])
       : setCartItems([...cartItems]);
+
+    setCartItems((prevState) => {
+        const newState = prevState.map((obj) => {
+          if (obj.id === flopItems[currID].id) {
+            return { ...obj, qty: flopItems[currID].qty };
+          }
+          return obj;
+        });
+        return newState;
+      });
   };
   console.log(cartItems);
   //console.log(flopItems);
@@ -68,6 +78,7 @@ const Dashboard = ({ flopItems, setFlopItems, cartItems, setCartItems }) => {
           <img className="logo" src={logo} alt="logo"></img>
           <Types types={types} filterItems={filterItems} />
           <Link to="/Cart">
+            <div className="cart-num">{cartItems.length !== 0 && cartItems.length}</div>
             <button className="cart cart-btn" data-testid="cart-btn">
               <HiOutlineShoppingCart />
             </button>
@@ -124,6 +135,7 @@ const Dashboard = ({ flopItems, setFlopItems, cartItems, setCartItems }) => {
           <img className="logo footer-logo" src={logoWhite} alt="logo"></img>
           <p id="bp-slogan">Create your path!</p>
         </div>
+        <Types types={types} filterItems={filterItems} />
         <hr />
         <div className="footer-copyright">
           <p>

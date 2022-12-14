@@ -1,7 +1,5 @@
 import axios from "axios";
 import App from "../../App";
-import {API_KEY} from './Checkout';
-
 import { render, waitFor, screen, cleanup, fireEvent, debug } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 

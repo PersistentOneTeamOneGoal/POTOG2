@@ -16,7 +16,7 @@ const Cart = ({
   setFlopItems,
 }) => {
   const itemTot = checkedItems.reduce(
-    (total, obj) => obj.price * obj.qty + total,
+    (total, obj) => obj.checked === true ? obj.price * obj.qty + total : total,
     0
   );
   setItemTotal(itemTot);
@@ -95,6 +95,7 @@ const CartItem = ({
   const [currImg, setCurrImg] = useState(0);
   const [currIndex, setCurrIndex] = useState(0);
   const count = useRef();
+  const [isActive, setIsActive] = useState(false);
 
   const addCheckedItem = () => {
     setCurrIndex(index);
@@ -115,6 +116,15 @@ const CartItem = ({
       setCheckedItems(sortItems);
       cartItems.checked = false;
     }
+    setCheckedItems((prevState) => {
+      const newState = prevState.map((obj) => {
+        if (obj.id === cartItems[index].id) {
+          return { ...obj, checked: !obj.checked };
+        }
+        return obj;
+      });
+      return newState;
+    });
     // setItemTotal(itemTot);
   };
 
@@ -230,15 +240,6 @@ const CartItem = ({
       return newState;
     });
   };
-
-  // useEffect(() => console.log("The cart after update", cartItems), [cartItems]);
-  // useEffect(
-  //   () => console.log("The checked after update", checkedItems),
-  //   [checkedItems]
-  // );
-
-  const [isActive, setIsActive] = useState(false);
-  //const [iShown, setIsShown] = useState(false);
 
   return (
     
