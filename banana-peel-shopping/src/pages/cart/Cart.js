@@ -256,7 +256,7 @@ const CartItem = ({
         <AiFillCloseCircle color="red" size={60}/></button>
       <div className="item-img-container">
         <img src={img[currImg]} alt={title} className="slipper-img-cart" />
-        {item.img.map((flopImg, index) => {
+        {/* {item.img.map((flopImg, index) => {
           return (
             <img
               src={img[index]}
@@ -267,7 +267,7 @@ const CartItem = ({
               className="thumbnail-img"
             />
           );
-        })}
+        })} */}
       </div>
       <div>
         <div className="item-info">
