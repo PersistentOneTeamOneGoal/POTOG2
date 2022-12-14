@@ -116,9 +116,9 @@ const Checkout = ({
       <div className="checkout-header">
         <img className="logo" src={logo} alt="logo"></img>
         <Link className="cart-btn" to="/Cart">
-          <FaShoppingCart />
+          <HiOutlineShoppingCart />
         </Link>
-      </div> */}
+      </div>
 
             {/*Current Nav Banner*/}
             <div className="top-nav-bar">
