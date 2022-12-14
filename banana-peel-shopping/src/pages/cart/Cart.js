@@ -3,7 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import "./Cart.scss";
 import logo from "../../assets/logo-bp.png";
 import { HiOutlineHome } from "react-icons/hi";
-import { AiOutlineCheckCircle } from "react-icons/ai";
+import { AiOutlineCheckCircle, AiFillCheckCircle , AiFillCloseCircle } from "react-icons/ai";
 import { FaRegMinusSquare, FaRegPlusSquare } from "react-icons/fa";
 
 const Cart = ({
@@ -42,6 +42,7 @@ const Cart = ({
           </Link>
         </div>
       </section>
+      <div className="title-page"><h1 id='text-cart'>SHOPPING CART<hr/></h1></div>
       <div className="cart-items-container">
         {cartItems.length ? (
           cartItems.map((item, index) => {
@@ -236,14 +237,26 @@ const CartItem = ({
   //   [checkedItems]
   // );
 
+  const [isActive, setIsActive] = useState(false);
+  //const [iShown, setIsShown] = useState(false);
+
   return (
+    
     <div className="cart-item">
-      <button onClick={addCheckedItem}>
-        <AiOutlineCheckCircle />
-      </button>
+       <button className="btnCheck buy-btn" onClick={addCheckedItem}>
+        <div className="cursor-pointer select-none">
+          {isActive? <AiFillCheckCircle className="check-icon" color="green" size={60} onClick={()=>{
+            setIsActive(!isActive)}} />:
+            <AiOutlineCheckCircle className="check-icon" color="green" size={60} onClick={()=>{
+            setIsActive(!isActive)}} />
+          }
+        </div>
+        </button>
+        <button className="btnRemove buy-btn" onClick={removeCartItem}>
+        <AiFillCloseCircle color="red" size={60}/></button>
       <div className="item-img-container">
-        <img src={img[currImg]} alt={title} className="item-img slipper-img" />
-        {item.img.map((flopImg, index) => {
+        <img src={img[currImg]} alt={title} className="slipper-img-cart" />
+        {/* {item.img.map((flopImg, index) => {
           return (
             <img
               src={img[index]}
@@ -254,7 +267,7 @@ const CartItem = ({
               className="thumbnail-img"
             />
           );
-        })}
+        })} */}
       </div>
       <div>
         <div className="item-info">
@@ -291,7 +304,6 @@ const CartItem = ({
           </button>
         </div>
       </div>
-      <button onClick={removeCartItem}>-</button>
     </div>
   );
 };
