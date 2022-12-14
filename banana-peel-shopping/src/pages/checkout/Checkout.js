@@ -57,7 +57,6 @@ const Checkout = ({
   return (
     
     <div className="checkout-container">
-<<<<<<< Updated upstream
       {confirm && (
         <div className="receipt-modal">
           <div className="receipt-header">Thank you for your purchase!</div>
@@ -115,9 +114,6 @@ const Checkout = ({
         </div>
       )}
       <div className="checkout-header">
-=======
-      {/* <div className="checkout-header">
->>>>>>> Stashed changes
         <img className="logo" src={logo} alt="logo"></img>
         <Link className="cart-btn" to="/Cart">
           <FaShoppingCart />
