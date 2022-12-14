@@ -245,15 +245,15 @@ const CartItem = ({
     <div className="cart-item">
        <button className="btnCheck buy-btn" onClick={addCheckedItem}>
         <div className="cursor-pointer select-none">
-          {isActive? <AiFillCheckCircle color="green" onClick={()=>{
+          {isActive? <AiFillCheckCircle className="check-icon" color="green" size={60} onClick={()=>{
             setIsActive(!isActive)}} />:
-            <AiOutlineCheckCircle color="green" onClick={()=>{
+            <AiOutlineCheckCircle className="check-icon" color="green" size={60} onClick={()=>{
             setIsActive(!isActive)}} />
           }
         </div>
         </button>
         <button className="btnRemove buy-btn" onClick={removeCartItem}>
-        <AiFillCloseCircle color="red"/></button>
+        <AiFillCloseCircle color="red" size={60}/></button>
       <div className="item-img-container">
         <img src={img[currImg]} alt={title} className="slipper-img-cart" />
         {item.img.map((flopImg, index) => {
@@ -304,7 +304,6 @@ const CartItem = ({
           </button>
         </div>
       </div>
-      <button onClick={removeCartItem}>-</button>
     </div>
   );
 };
