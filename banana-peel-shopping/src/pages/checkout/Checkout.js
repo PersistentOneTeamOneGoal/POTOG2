@@ -187,12 +187,31 @@ const Checkout = ({
       <footer className="footer-container">
         <div className="footer-main">
           <img className="logo footer-logo" src={logoWhite} alt="logo"></img>
-          <p id="bp-slogan">Create your path!</p>
+          <p id="bp-slogan">Slip into your path!</p>
+
+          <div className="discount-container">
+            <h5 id="discount-text">
+              Sign Up & Save 20% Subscribe to our emails for exclusive products,
+              discounts and more!
+            </h5>
+            <form className="discount-form">
+              <input
+                className="d-email-input checkout-input"
+                type="email"
+                placeholder="Email Address"
+                // onChange={onChange}
+                name="email"
+              />
+              <button className="email-btn">Send me the discount!</button>
+            </form>
+          </div>
         </div>
+
         <hr />
         <div className="footer-copyright">
           <p>
-            &copy; Copyright 2022 | ProfElec11076 | PERSISTENT_OneTeamOneGoal
+            &copy; 2022 ProfElec11076 | PERSISTENT_OneTeamOneGoal | All Rights
+            Reserved
           </p>
         </div>
       </footer>

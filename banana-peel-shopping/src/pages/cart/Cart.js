@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import "./Cart.scss";
 import logo from "../../assets/logo-bp.png";
+import logoWhite from "../../assets/logo-bp-white3.png";
 import { HiOutlineHome } from "react-icons/hi";
 import { AiOutlineCheckCircle, AiFillCheckCircle , AiFillCloseCircle } from "react-icons/ai";
 import { FaRegMinusSquare, FaRegPlusSquare } from "react-icons/fa";
@@ -15,12 +16,16 @@ const Cart = ({
   setItemTotal,
   setFlopItems,
 }) => {
-  const itemTot = checkedItems.reduce(
-    (total, obj) => obj.checked === true ? obj.price * obj.qty + total : total,
-    0
-  );
-  setItemTotal(itemTot);
-
+  
+  
+  useEffect(() => {
+    setItemTotal(checkedItems.reduce(
+      (total, obj) => obj.checked === true ? obj.price * obj.qty + total : total,
+      0
+    ));
+    console.log("log", itemTotal);
+  }, [checkedItems, itemTotal, setItemTotal])
+  
   return (
     <div>
 
@@ -35,7 +40,16 @@ const Cart = ({
       <section className="nav-bar sticky">
         <div className="nav-container">
           <img className="logo" src={logo} alt="logo"></img>
-          <Link to="/">
+          <Link to="/"
+            onClick={() => {
+              setCheckedItems((prevState) => {
+                const newState = prevState.map((obj) => {
+                    return { ...obj, checked: false };
+                });
+                return newState;
+              });
+            }}
+          >
             <button className="cart cart-btn" data-testid="home-btn">
               <HiOutlineHome />
             </button>
@@ -78,6 +92,37 @@ const Cart = ({
         <></>
       )}
       </div>
+      <footer className="footer-container">
+        <div className="footer-main">
+          <img className="logo footer-logo" src={logoWhite} alt="logo"></img>
+          <p id="bp-slogan">Slip into your path!</p>
+
+          <div className="discount-container">
+            <h5 id="discount-text">
+              Sign Up & Save 20% Subscribe to our emails for exclusive products,
+              discounts and more!
+            </h5>
+            <form className="discount-form">
+              <input
+                className="d-email-input checkout-input"
+                type="email"
+                placeholder="Email Address"
+                // onChange={onChange}
+                name="email"
+              />
+              <button className="email-btn">Send me the discount!</button>
+            </form>
+          </div>
+        </div>
+
+        <hr />
+        <div className="footer-copyright">
+          <p>
+            &copy; 2022 ProfElec11076 | PERSISTENT_OneTeamOneGoal | All Rights
+            Reserved
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };

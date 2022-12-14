@@ -377,3 +377,62 @@ h4 {
     serif;
   font-size: 2em;
 }
+
+
+.cart-num-1, .cart-num-2, .cart-num-3,.cart-num-4{
+  position: absolute;
+  font-size: 10px;
+  height: 14px;
+  text-align: center;
+  width: 14px;
+  text-decoration: none !important;
+  background-color: red;
+  color: white;
+  border-radius: 25px;
+  right: 42px;
+  top: 28px;
+  z-index: 1;
+}
+
+.discount-container {
+  margin-top: 3em;
+  right: 0px;
+  margin-bottom: 11em!important;
+  margin-right: 16em;
+  width: fit-content;
+  position: absolute;
+}
+
+.email-btn{
+  height: 60px;
+  min-width: fit-content;
+  padding: 10px 15px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  background-color: var(--brand-color);
+  border: none;
+  border-radius: 30px;
+}
+
+.discount-form {
+  align-items: baseline;
+  position: inherit;
+  right: 0px !important;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: flex;
+  top: 6em;
+}
+
+.d-email-input {
+  margin-right: 20px!important;
+  width: 25em!important;
+}
+
+h5#discount-text {
+  margin-top: 70px;
+}
