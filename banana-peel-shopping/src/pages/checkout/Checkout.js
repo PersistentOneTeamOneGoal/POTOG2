@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "./Checkout.scss";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import logo from "../../assets/logo-bp.png";
 import logoWhite from "../../assets/logo-bp-white3.png";
@@ -113,13 +114,6 @@ const Checkout = ({
           </Link>
         </div>
       )}
-      <div className="checkout-header">
-        <img className="logo" src={logo} alt="logo"></img>
-        <Link className="cart-btn" to="/Cart">
-          <HiOutlineShoppingCart />
-        </Link>
-      </div>
-
             {/*Current Nav Banner*/}
             <div className="top-nav-bar">
         <a href="#prod-container" id="text-nav-top">
@@ -192,8 +186,8 @@ const CheckOutItem = ({ item, index }) => {
 
   return (
     <div className="cart-item">
-      <div className="item-img-container">
-        <img src={img[0]} alt={title} className="checkout-slipper" />
+      <div className="item-img-containers">
+        <img src={img[0]} className="checkout-slipper" alt={title}></img>
       </div>
       <div>
         <div className="item-info">
