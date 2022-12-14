@@ -38,21 +38,20 @@ const Checkout = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setConfirm(true);
 
-    await axios({
-      method: "POST",
-      url: `https://api.mailslurp.com/sendEmail?apiKey=${API_KEY}`,
-      data: {
-        senderId: "11eafd1d-4c35-4e6a-ab1d-d371ac475534",
-        to: "11eafd1d-4c35-4e6a-ab1d-d371ac475534@mailslurp.com",
-        subject: `BananaPeel - Order for ${user.name}`,
-        body: `Good day, user ${user.name}! We have received your order entailing these following items: ${message}. With total price of: $${itemTotal}. To confirm order, click the confirmation link below https://bananapeel.com`,
-      },
-    }).then((res) => {
-      const { data } = res;
-      console.log("post ", data);
-    });
+    if((user.name && user.contact && user.email) && user.name.match(/^[A-Za-z]+$/)){
+      setConfirm(true);
+      await axios({
+        method: "POST",
+        url: `https://api.mailslurp.com/sendEmail?apiKey=${API_KEY}`,
+        data: {
+          senderId: "11eafd1d-4c35-4e6a-ab1d-d371ac475534",
+          to: "11eafd1d-4c35-4e6a-ab1d-d371ac475534@mailslurp.com",
+          subject: `BananaPeel - Order for ${user.name}`,
+          body: `Good day, user ${user.name}! We have received your order entailing these following items: ${message}. With total price of: $${itemTotal}. To confirm order, click the confirmation link below https://bananapeel.com`,
+        },
+      })
+    }
   };
 
   return (
@@ -78,19 +77,11 @@ const Checkout = ({
                     <td>{user.contact}</td>
                   </tr>
                 </table>
-
-                {/* <h6>Name: </h6>
-              <p className="order-name">{user.name}</p>
-              <h6>Email: </h6>
-              <p className="order-email">{user.email}</p>
-              <h6>Contact No.: </h6>
-              <p className="order-contact">{user.contact}</p> */}
               </div>
+
               <div className="order-body">
                 {checkedItems.map((item) => {
-                  return (
-
-                    
+                  return (                    
                     <div className="order-body container">
                       <p className="order-body order-title">{item.title}</p>
                       <div className="order-body qty"> Qty: {item.qty}</div>
@@ -103,7 +94,7 @@ const Checkout = ({
                 })}
                 <div className="order-footer">
                   <div className="order-footer item-tot">
-                    Total: ${itemTotal}
+                    Total: ${Number(itemTotal.toFixed(2))}
                   </div>
                   <div className="order-footer notif">
                     {" "}
