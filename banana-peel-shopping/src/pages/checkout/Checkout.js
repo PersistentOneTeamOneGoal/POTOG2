@@ -131,7 +131,7 @@ const Checkout = ({
         </Link>
         </div>
       </section>
-
+      <div className="title-page"><h1 id='text-cart'>CHECKOUT<hr/></h1></div>
       <form className="checkout-inputs" onSubmit={handleSubmit}>
         <input
           className="name-input"
@@ -140,7 +140,6 @@ const Checkout = ({
           onChange={onChange}
           name="name"
         />
-
         <input
           className="contact-input"
           type="number"
@@ -162,8 +161,10 @@ const Checkout = ({
             <p> Total Amount: ${Number(itemTotal.toFixed(2))} </p>
           </div>
         </div>
-        <button className="order-btn">Place Order</button>
+        <button data-testid="order-btn" className="order-btn">Place Order</button>
       </form>
+        </div>
+      </div>
       
       <footer className="footer-container">
         <div className="footer-main">
@@ -185,7 +186,7 @@ const CheckOutItem = ({ item, index }) => {
   const { title, price, qty, img, desc } = item;
 
   return (
-    <div className="cart-item">
+    <div className="checkout-item">
       <div className="item-img-containers">
         <img src={img[0]} className="checkout-slipper" alt={title}></img>
       </div>
