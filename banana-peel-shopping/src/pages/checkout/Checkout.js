@@ -134,7 +134,6 @@ const Checkout = ({
       <div className="title-page"><h1 id='text-cart'>CHECKOUT<hr/></h1></div>
       <form className="checkout-inputs" onSubmit={handleSubmit}>
         <input
-        data-testid="name"
           className="name-input"
           type="text"
           placeholder="Name"
@@ -142,15 +141,12 @@ const Checkout = ({
           name="name"
         />
         <input
-        data-testid="number"
           className="contact-input"
           type="number"
           placeholder="Contact No."
           onChange={onChange}
           name="contact"
-        />        
-        <input
-        data-testid="email"
+        />        <input
         className="email-input"
         type="email"
         placeholder="Email"
@@ -167,6 +163,8 @@ const Checkout = ({
         </div>
         <button data-testid="order-btn" className="order-btn">Place Order</button>
       </form>
+        </div>
+      </div>
       
       <footer className="footer-container">
         <div className="footer-main">
@@ -188,7 +186,7 @@ const CheckOutItem = ({ item, index }) => {
   const { title, price, qty, img, desc } = item;
 
   return (
-    <div className="cart-item">
+    <div className="checkout-item">
       <div className="item-img-containers">
         <img src={img[0]} className="checkout-slipper" alt={title}></img>
       </div>
