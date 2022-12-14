@@ -36,6 +36,11 @@ describe('This is checks the cart UI',()=>{
 
         const clear = waitFor(()=> screen.getByTestId("clear-btn"));
         expect(clear).toBeTruthy();
+    });
+
+    it("has a button to add item for checkout",()=>{
+        const add = waitFor(()=> screen.getByTestId("add-btn"));
+        expect(add).toBeTruthy();
     })
 
 })

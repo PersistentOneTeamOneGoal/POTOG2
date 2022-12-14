@@ -3,7 +3,7 @@
 /* eslint-disable testing-library/await-async-utils */
 /* eslint-disable testing-library/await-async-query */
 import { cleanup, render, screen, waitFor, fireEvent } from '@testing-library/react';
-import Dashboard from './Dashboard';
+import App from '../../App';
 import "@testing-library/jest-dom/extend-expect";
 import { MemoryRouter } from 'react-router-dom';
 
@@ -59,7 +59,6 @@ describe("Checks the Dashboard UI",()=>{
         waitFor(() => {
             const modal = screen.getByTestId("modal");
             waitFor(()=> expect(modal).toBeInTheDocument());
-// expect(await screen.getByTestId("modal")).toHaveTextContent(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consequat a turpis non maximus. Praesent tincidunt vitae risus in maximus. Duis efficitur porta lorem vel dapibus. In sed justo sagittis, mollis diam eget, facilisis erat. `)
             const modalbuybtn = screen.getByTestId("buy-btn");
             waitFor(()=>expect(modalbuybtn).toBeInTheDocument());
         });
@@ -73,7 +72,7 @@ describe("Checks the Dashboard UI",()=>{
         waitFor(()=> expect(screen.getByTestId("look-btn1")).toBeInTheDocument());
         fireEvent.click(screen.getByTestId('look-btn1'));
         expect(screen.getByTestId("modal")).toBeInTheDocument();
-        expect(screen.getByTestId("modal")).toHaveTextContent(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consequat a turpis non maximus. Praesent tincidunt vitae risus in maximus. Duis efficitur porta lorem vel dapibus. In sed justo sagittis, mollis diam eget, facilisis erat. `)
+        expect(screen.getByTestId("modal")).toHaveTextContent(`LOOKIN LIKE A SNACK`)
     });
 
     it("has a button for adding and subtracting item quantity", async ()=>{
@@ -94,9 +93,18 @@ describe("Checks the Dashboard UI",()=>{
         });
     }); // passed
 
-    it("Displays the item quantity",async()=>{
+    it("checks the UI in the modal",async()=>{
         render(<App />, {wrapper: MemoryRouter})
         // render(<Dashboard />, {wrapper: MemoryRouter})
+
+        fireEvent.mouseOver(screen.getByTestId("products-item1"));
+        waitFor(()=> expect(screen.getByTestId("look-btn1")).toBeInTheDocument());
+        fireEvent.click(screen.getByTestId("look-btn1"));
+        expect(screen.getByTestId("modal")).toBeInTheDocument();
+    }); // passed
+
+    it("checks the functionalities",async()=>{
+        render(<App />, {wrapper: MemoryRouter})
 
         fireEvent.mouseOver(screen.getByTestId("products-item1"));
         waitFor(()=> expect(screen.getByTestId("look-btn1")).toBeInTheDocument());
@@ -105,14 +113,14 @@ describe("Checks the Dashboard UI",()=>{
         waitFor(()=>{
             const qty = screen.getByTestId("itemQty");
             expect(qty).toBeInTheDocument();
-            const minus = screen.getByTestId("minus-btn");
-            expect(minus).toBeInTheDocument();
             const plus = screen.getByTestId("plus-btn");
             expect(plus).toBeInTheDocument();
             fireEvent.click(plus);
             expect(qty).toHaveTextContent("1");
+            const minus = screen.getByTestId("minus-btn");
+            expect(minus).toBeInTheDocument();
             fireEvent.click(minus);
             expect(qty).toHaveTextContent("0");
         })
-    }); // passed
+    })
 })
