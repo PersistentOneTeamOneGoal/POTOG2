@@ -134,13 +134,20 @@ const Checkout = ({
 
       <form className="checkout-inputs" onSubmit={handleSubmit}>
         <input
+        data-testid="name"
           className="name-input"
           type="text"
           placeholder="Name"
           onChange={onChange}
           name="name"
         />
-
+        <input
+          className="email-input"
+          type="email"
+          placeholder="Email"
+          onChange={onChange}
+          name="email"
+        />
         <input
           className="contact-input"
           type="number"
@@ -162,7 +169,7 @@ const Checkout = ({
             <p> Total Amount: ${Number(itemTotal.toFixed(2))} </p>
           </div>
         </div>
-        <button className="order-btn">Place Order</button>
+        <button data-testid="order-btn" className="order-btn">Place Order</button>
       </form>
       
       <footer className="footer-container">
