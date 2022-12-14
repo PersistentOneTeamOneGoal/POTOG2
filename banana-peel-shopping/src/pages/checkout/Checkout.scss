@@ -9,7 +9,7 @@
 
 
   .checked-items{
-
+    width: min-content;
   }
 
   .checkout-slipper{
@@ -29,6 +29,17 @@
     margin: 5em 0em 5em 20em;
   }
 
+.checkout-wrapper{
+    border-radius: 10px;
+    background-color: var(--white-v2);
+    margin: 10vh 10vh 10vh 40vh;
+    text-transform: capitalize;
+    display: block;
+    padding: 5em;
+    width: fit-content;
+    align-items: center;
+}
+
   .checkout-input {
     width: -webkit-fill-available;
     display: block;
@@ -37,6 +48,7 @@
     color: inherit;
     border: none;
     border-radius: 10px;
+    cursor: text;
     color: black;
     margin: 20px 0px;
     padding: 10px 0px 10px 10px;
@@ -70,3 +82,59 @@
     border-radius: 30px;
 
   }
+
+  .receipt-header{
+    height: min-content;
+    text-align: center;
+  }
+
+  .receipt-overlay{
+    position: fixed;
+    z-index: 99;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgb(0, 0, 0, 50%);
+  }
+  .receipt-modal {
+    border-radius: var(--radius);
+    z-index: 100;
+    position: absolute;
+    background-color: #fff;
+    width: auto;
+    padding: 3em;
+    display: flex;
+    left: 39%;
+    top: 15%;
+    opacity: 1;
+    display: block;
+}
+
+.dashboard-btn{
+    margin-top: 30px;
+    display: block;
+    font-weight: 600;
+    font-size: 1.5em;
+    background-color: var(--brand-color);
+    padding: 20px;
+    width: -webkit-fill-available;
+    text-align: center;
+    color: black;
+    border-radius: var(--radius);
+}
+
+.t-1{
+    font-weight: 700;
+}
+
+.order-footer {
+    padding-top: 12px;
+    text-align: center;
+}
+
+.item-tot, .order-title{
+    font-weight: 700;
+}
