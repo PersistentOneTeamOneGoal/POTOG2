@@ -248,7 +248,7 @@
   margin: 0vh 10vh 10vh 10vh;
   text-transform: capitalize;
   display: grid;
-  padding: 3em;
+  padding: 3em 1.5vw 3em 1.5vw;
   grid-template-columns: auto auto auto auto;
   align-items: center;
 }
@@ -280,10 +280,10 @@
   position: absolute;
   background-color: #fff;
   width: auto;
-  padding: 3em;
+  padding: 2vw;
   display: flex;
-  left: 20%;
-  top: 6%;
+  left: 13.5vw;
+  top: 1vh;
   opacity: 1;
 }
 
@@ -310,7 +310,6 @@
 .lightbox-overlay {
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
   left: 0;
   top: 0;
   width: 100%;
@@ -398,7 +397,7 @@ h4 {
   margin-top: 3em;
   right: 0px;
   margin-bottom: 11em!important;
-  margin-right: 16em;
+  margin-right: 4vw;
   width: fit-content;
   position: absolute;
 }
@@ -435,4 +434,18 @@ h4 {
 
 h5#discount-text {
   margin-top: 70px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.prc.special{
+  padding-left: 4px;
 }

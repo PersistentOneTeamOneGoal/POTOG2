@@ -32,7 +32,7 @@
 .checkout-wrapper{
     border-radius: 10px;
     background-color: var(--white-v2);
-    margin: 10vh 10vh 10vh 40vh;
+    margin: 10vh 10vh 10vh 13vw;
     text-transform: capitalize;
     display: block;
     padding: 5em;
@@ -138,3 +138,13 @@
 .item-tot, .order-title{
     font-weight: 700;
 }
+
+.item-info.cart-info{
+  padding-left: 5vw;
+}
+.total-amt{
+  font-weight: bold;
+  margin: 1.1em 1.8em  1.1em  0.3em ;
+  font-size: 16pt;
+}
+

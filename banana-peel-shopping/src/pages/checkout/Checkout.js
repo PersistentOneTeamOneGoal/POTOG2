@@ -18,8 +18,9 @@ const Checkout = ({
     contact: "",
     email: "",
   });
+  const [email, setEmail] = useState("");
   const API_KEY =
-    "ad904c1fb1a8cb891cba6e8e05a98a98ce41bf19e27aa9922610884abad56aa1";
+    "60428ac9f093651ef3a1becbad12071657c8ea401dc7a02f0f49c9e00ff89159";
   const axios = require("axios");
   const message = checkedItems
     .map((item) => ` ${item.title} Qty: ${item.qty}`)
@@ -34,23 +35,51 @@ const Checkout = ({
       [name]: value,
     });
   };
-  console.log("log", confirm);
+  
+  //On change handling
+  const onChangeDisc = (e) => {
+    setEmail(e.target.value);
+    console.log(email);
+  }
+
+  //API for email discount
+  const handleDiscount = async (e) => {
+    e.preventDefault();
+
+    if (email) {  
+      await axios({
+        method: "POST",
+        url: `https://api.mailslurp.com/sendEmail?apiKey=${API_KEY}`,
+        data: {
+          senderId: "e8387ff0-fb67-40f5-b3f2-822571e1c02c",
+          to: "e8387ff0-fb67-40f5-b3f2-822571e1c02c@mailslurp.com",
+          subject: `BananaPeel - You received a discount!`,
+          body: `Good day ${email}! You have received a one-time 20% discount on all of our items using this voucher: ${(Math.random() + 1).toString(36).substring(7)}. Shop at https://bananapeel.com`,
+        },
+      });
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if((user.name && user.contact && user.email) && user.name.match(/^[A-Za-z]+$/)){
+    if (
+      (user.name !== '' &&
+      user.contact !== '' &&
+      user.email !== '') &&
+      user.name.match(/^[A-Za-z]|[A-Za-z][A-Za-z\s]+$/)
+    ) {
       setConfirm(true);
       await axios({
         method: "POST",
         url: `https://api.mailslurp.com/sendEmail?apiKey=${API_KEY}`,
         data: {
-          senderId: "11eafd1d-4c35-4e6a-ab1d-d371ac475534",
-          to: "11eafd1d-4c35-4e6a-ab1d-d371ac475534@mailslurp.com",
+          senderId: "e8387ff0-fb67-40f5-b3f2-822571e1c02c",
+          to: "e8387ff0-fb67-40f5-b3f2-822571e1c02c@mailslurp.com",
           subject: `BananaPeel - Order for ${user.name}`,
           body: `Good day, user ${user.name}! We have received your order entailing these following items: ${message}. With total price of: $${itemTotal}. To confirm order, click the confirmation link below https://bananapeel.com`,
         },
-      })
+      });
     }
   };
 
@@ -81,7 +110,7 @@ const Checkout = ({
 
               <div className="order-body">
                 {checkedItems.map((item) => {
-                  return (                    
+                  return (
                     <div className="order-body container">
                       <p className="order-body order-title">{item.title}</p>
                       <div className="order-body qty"> Qty: {item.qty}</div>
@@ -137,7 +166,18 @@ const Checkout = ({
         <div className="nav-container">
           <img className="logo" src={logo} alt="logo"></img>
           {/* <Types types={types} filterItems={filterItems} /> */}
-          <Link className="cart-btn" to="/Cart">
+          <Link
+            className="cart-btn"
+            to="/Cart"
+            onClick={() => {
+              setCheckedItems((prevState) => {
+                const newState = prevState.map((obj) => {
+                  return { ...obj, checked: false };
+                });
+                return newState;
+              });
+            }}
+          >
             <HiOutlineShoppingCart />
           </Link>
         </div>
@@ -177,7 +217,7 @@ const Checkout = ({
               return <CheckOutItem item={item} index={index} />;
             })}
             <div className="items-total">
-              <p> Total Amount: ${Number(itemTotal.toFixed(2))} </p>
+              <p className="total-amt"> Total Amount: <span className="prc">${Number(itemTotal.toFixed(2))}</span> </p>
             </div>
           </div>
           <button className="order-btn">Place Order</button>
@@ -194,13 +234,13 @@ const Checkout = ({
               Sign Up & Save 20% Subscribe to our emails for exclusive products,
               discounts and more!
             </h5>
-            <form className="discount-form">
+            <form className="discount-form" onSubmit={handleDiscount}>
               <input
                 className="d-email-input checkout-input"
                 type="email"
                 placeholder="Email Address"
-                // onChange={onChange}
                 name="email"
+                onChange={onChangeDisc}
               />
               <button className="email-btn">Send me the discount!</button>
             </form>
@@ -228,16 +268,16 @@ const CheckOutItem = ({ item, index }) => {
         <img src={img[0]} className="checkout-slipper" alt={title}></img>
       </div>
       <div>
-        <div className="item-info">
+        <div className="item-info cart-info">
           <header>
-            <h4>{title}</h4>
-            <h4 className="price">Unit Price: ${price}</h4>
+            <h4 className="title">{title}</h4>
+            <h4 className="price">Unit Price: <span className="prc">${price}</span></h4>
           </header>
           <p className="item-text desc">{desc}</p>
           <div>
-            <h4>Current item: {qty}</h4>
+            <h4>Item Qty: <span className="prc">{qty}</span></h4>
             <h4 className="price">
-              Item Total: ${Number((price * qty).toFixed(2))}
+              Item Total: <span className="prc">${Number((price * qty).toFixed(2))}</span>
             </h4>
           </div>
         </div>

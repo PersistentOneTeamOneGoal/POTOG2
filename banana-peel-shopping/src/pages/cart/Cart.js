@@ -16,7 +16,10 @@ const Cart = ({
   setItemTotal,
   setFlopItems,
 }) => {
-  
+  const [email, setEmail] = useState("");
+  const API_KEY =
+  "60428ac9f093651ef3a1becbad12071657c8ea401dc7a02f0f49c9e00ff89159";
+  const axios = require("axios");
   
   useEffect(() => {
     setItemTotal(checkedItems.reduce(
@@ -26,6 +29,30 @@ const Cart = ({
     console.log("log", itemTotal);
   }, [checkedItems, itemTotal, setItemTotal])
   
+  //On change handling
+  const onChange = (e) => {
+    setEmail(e.target.value);
+    console.log(email);
+  }
+
+  //API for email discount
+  const handleDiscount = async (e) => {
+    e.preventDefault();
+
+    if (email) {  
+      await axios({
+        method: "POST",
+        url: `https://api.mailslurp.com/sendEmail?apiKey=${API_KEY}`,
+        data: {
+          senderId: "e8387ff0-fb67-40f5-b3f2-822571e1c02c",
+          to: "e8387ff0-fb67-40f5-b3f2-822571e1c02c@mailslurp.com",
+          subject: `BananaPeel - You received a discount!`,
+          body: `Good day ${email}! You have received a one-time 20% discount on all of our items using this voucher: ${(Math.random() + 1).toString(36).substring(7)}. Shop at https://bananapeel.com`,
+        },
+      });
+    }
+  };
+
   return (
     <div>
 
@@ -78,7 +105,7 @@ const Cart = ({
       {cartItems.length ? (
         <div className="payables-container">
           <div className="total">
-            Total: ${Number(itemTotal).toFixed(2)}
+            Total: <span className="prc"> ${Number(itemTotal).toFixed(2)} </span>
           </div>
           {!itemTotal ? (
             <p className="checkout-text">Checkout</p>
@@ -102,12 +129,12 @@ const Cart = ({
               Sign Up & Save 20% Subscribe to our emails for exclusive products,
               discounts and more!
             </h5>
-            <form className="discount-form">
+            <form className="discount-form" onSubmit={handleDiscount}>
               <input
                 className="d-email-input checkout-input"
                 type="email"
                 placeholder="Email Address"
-                // onChange={onChange}
+                onChange={onChange}
                 name="email"
               />
               <button className="email-btn">Send me the discount!</button>
@@ -170,7 +197,6 @@ const CartItem = ({
       });
       return newState;
     });
-    // setItemTotal(itemTot);
   };
 
   const removeCartItem = () => {
@@ -228,8 +254,10 @@ const CartItem = ({
     setCurrIndex(index);
     setCartItems((prevState) => {
       const newState = prevState.map((obj) => {
-        if (obj.id === cartItems[index].id) {
-          return { ...obj, qty: obj.qty - 1 };
+        if(obj.qty > 1){
+          if (obj.id === cartItems[index].id) {
+            return { ...obj, qty: obj.qty - 1 };
+          }
         }
         return obj;
       });
@@ -237,8 +265,10 @@ const CartItem = ({
     });
     setFlopItems((prevState) => {
       const newState = prevState.map((obj) => {
-        if (obj.id === cartItems[index].id) {
-          return { ...obj, qty: obj.qty - 1 };
+        if(obj.qty > 1){
+          if (obj.id === cartItems[index].id) {
+            return { ...obj, qty: obj.qty - 1 };
+          }
         }
         return obj;
       });
@@ -246,8 +276,10 @@ const CartItem = ({
     });
     setCheckedItems((prevState) => {
       const newState = prevState.map((obj) => {
-        if (obj.id === cartItems[index].id) {
-          return { ...obj, qty: obj.qty - 1 };
+        if(obj.qty > 1){
+          if (obj.id === cartItems[index].id) {
+            return { ...obj, qty: obj.qty - 1 };
+          }
         }
         return obj;
       });
@@ -260,7 +292,12 @@ const CartItem = ({
     setCartItems((prevState) => {
       const newState = prevState.map((obj) => {
         if (obj.id === cartItems[index].id) {
-          return { ...obj, qty: parseInt(count.current.value) };
+          if(isNaN(obj.qty) || obj.qty === 0){
+            return { ...obj, qty: 1 };
+          }
+          else{
+            return { ...obj, qty: parseInt(count.current.value) };
+          }
         }
         return obj;
       });
@@ -298,22 +335,21 @@ const CartItem = ({
           }
         </div>
         </button>
-        <button data-testid="add-btn"className="btnRemove buy-btn" onClick={removeCartItem}>
-        <AiFillCloseCircle color="red" size={60}/></button>
+        
       <div className="item-img-container">
         <img src={img[currImg]} alt={title} className="slipper-img-cart" />
       </div>
       <div>
         <div className="item-info">
           <header>
-            <h4>{title}</h4>
-            <h4 className="price">Unit Price: ${price}</h4>
+            <h4 className="title">{title}</h4>
+            <h4 className="price">Unit Price: <span className="prc"> ${price} </span> </h4>
           </header>
           <p className="item-text desc">{desc}</p>
-          <div>
-            <h4>Current item: {cartItems[index].qty}</h4>
+          <div className="price-container">
+            <h4 className="qty">Item Qty: <span className="prc"> {cartItems[index].qty} </span></h4>
             <h4 className="price">
-              Item Total: ${Number((price * qty).toFixed(2))}
+              Item Total:  <span className="prc"> ${Number((price * qty).toFixed(2))} </span> 
             </h4>
           </div>
         </div>
@@ -323,7 +359,6 @@ const CartItem = ({
             className="decItem buy-btn"
             onClick={handleDeductQty}
           >
-            {/**sad */}
             <FaRegMinusSquare />
           </button>
           <input
@@ -338,7 +373,10 @@ const CartItem = ({
             <FaRegPlusSquare />
           </button>
         </div>
+        
       </div>
+      <button data-testid="add-btn"className="btnRemove buy-btn" onClick={removeCartItem}>
+        <AiFillCloseCircle color="red" size={60}/></button>
     </div>
   );
 };

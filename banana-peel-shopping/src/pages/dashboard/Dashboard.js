@@ -18,9 +18,12 @@ const Dashboard = ({ flopItems, setFlopItems, cartItems, setCartItems }) => {
   const [types, setTypes] = useState(allTypes);
   //Local States
   const [showItemDetail, setShowItemDetail] = useState(false);
-  // const [showCart, setShowCart] = useState(false);
   const [qty, setQty] = useState(0);
   const count = useRef();
+  const [email, setEmail] = useState("");
+  const API_KEY =
+    "60428ac9f093651ef3a1becbad12071657c8ea401dc7a02f0f49c9e00ff89159";
+  const axios = require("axios");
 
   //For filtering items by type
   const filterItems = (type) => {
@@ -56,8 +59,34 @@ const Dashboard = ({ flopItems, setFlopItems, cartItems, setCartItems }) => {
       return newState;
     });
   };
-  console.log(cartItems);
-  //console.log(flopItems);
+
+  //On change handling
+  const onChange = (e) => {
+    setEmail(e.target.value);
+    console.log(email);
+  };
+
+  //API for email discount
+  const handleDiscount = async (e) => {
+    e.preventDefault();
+
+    if (email) {
+      await axios({
+        method: "POST",
+        url: `https://api.mailslurp.com/sendEmail?apiKey=${API_KEY}`,
+        data: {
+          senderId: "e8387ff0-fb67-40f5-b3f2-822571e1c02c",
+          to: "e8387ff0-fb67-40f5-b3f2-822571e1c02c@mailslurp.com",
+          subject: `BananaPeel - You received a discount!`,
+          body: `Good day ${email}! You have received a one-time 20% discount on all of our items using this voucher: ${(
+            Math.random() + 1
+          )
+            .toString(36)
+            .substring(7)}. Shop at https://bananapeel.com`,
+        },
+      });
+    }
+  };
 
   return (
     //Main container for the whole dashboard app
@@ -108,12 +137,6 @@ const Dashboard = ({ flopItems, setFlopItems, cartItems, setCartItems }) => {
         />
       )}
 
-      {/*Testing Cart*/}
-      {/* {
-        showCart &&
-        <Cart cartItems={cartItems} setCartItems={setCartItems} checkedItems={checkedItems} setCheckedItems={setCheckedItems} itemTotal={itemTotal} setItemTotal={setItemTotal} screen={screen} setScreen={screen}/>
-      }  */}
-
       {/*Product Container and Items*/}
       <section
         data-testid="products-container"
@@ -139,12 +162,12 @@ const Dashboard = ({ flopItems, setFlopItems, cartItems, setCartItems }) => {
               Sign Up & Save 20% Subscribe to our emails for exclusive products,
               discounts and more!
             </h5>
-            <form className="discount-form">
+            <form className="discount-form" onSubmit={handleDiscount}>
               <input
                 className="d-email-input checkout-input"
                 type="email"
                 placeholder="Email Address"
-                // onChange={onChange}
+                onChange={onChange}
                 name="email"
               />
               <button className="email-btn">Send me the discount!</button>
@@ -220,7 +243,7 @@ const Item = ({ key, item, setCurrID, setShowItemDetail }) => {
         <div className="item-info">
           <header>
             <h4>{title}</h4>
-            <h4 className="price">${price}</h4>
+            <h4 className="price"><span className="prc">${price}</span></h4>
           </header>
         </div>
         <button
@@ -240,6 +263,7 @@ const Item = ({ key, item, setCurrID, setShowItemDetail }) => {
   );
 };
 
+//Floating modals
 const ItemModal = ({
   qty,
   setQty,
@@ -284,20 +308,23 @@ const ItemModal = ({
         <div className="item-info">
           <header>
             <h4 className="flop-title">{flopItems[currID].title}</h4>
-            <h4 className="price">Unit Price: ${flopItems[currID].price}</h4>
+            <h4 className="price">Unit Price: <span className="prc"> ${flopItems[currID].price} </span></h4>
             <h4 className="price">
-              Subtotal: ${Number((flopItems[currID].price * qty).toFixed(2))}
+              Subtotal:
+            <span className="prc"> ${Number((flopItems[currID].price * qty).toFixed(2))} </span>
             </h4>
-            n-container
           </header>
           <p className="item-text desc">{flopItems[currID].desc}</p>
-          <div>
-            <h4>Current item: {flopItems[currID].qty}</h4>
-            <h4 className="price">
-              Item Total: $
+          <div className="price-container">
+            <h4 className="qty">Item Qty: <span className="prc"> {flopItems[currID].qty} </span></h4>
+            <h4 className="price-spec">
+              Item Total:  
+              <span className="prc special"> 
+              $
               {Number(
                 (flopItems[currID].price * flopItems[currID].qty).toFixed(2)
               )}
+              </span>
             </h4>
           </div>
 
@@ -316,8 +343,12 @@ const ItemModal = ({
               value={qty}
               ref={count}
               onChange={() => {
-                //to be worked on, needs to set placeholder to 0 automatically
-                setQty(parseInt(count.current.value));
+                if(isNaN(qty)){
+                  setQty(0);
+                }
+                else{
+                  setQty(parseInt(count.current.value));
+                }
               }}
             />
             <button

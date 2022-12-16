@@ -26,6 +26,7 @@
 
   .item-info {
     padding-top: 30px;
+    
 }
 
 #text-cart{
@@ -65,9 +66,10 @@
 // Checkout Total
 .total{
     font-weight: bold;
-    margin: 1.8em;
+    margin: 1.1em 1.8em  1.8em  1.8em ;
     position: absolute;
     right: 18.5%;
+    font-size: 16pt;
 }
 
 .checkout-text, .checkout-btn{    
@@ -103,16 +105,28 @@
 
 .cart-item{
     margin: auto;
-    padding-left: 5vw;
+    padding-left: 4vw;
+    padding-right: 5vw;
+    
 
 }
 
-.item-img-container{
-    padding-left: 2vw;
-}
 
 .buy-btn-container {
   margin-bottom: 1em;
   display: table;
 }
 
+.prc{
+  color:#ffb701;
+}
+
+.qty{
+  padding-right: 1vw;
+}
+
+.title, .flop-title{
+  color: #ffb701;
+  font-size: 24pt;
+  margin-top: 0;
+}
